@@ -1,0 +1,17 @@
+# Fichiers sensibles
+wp-config.php
+.env
+
+# Médias lourds
+wp-content/uploads/
+wp-content/cache/
+wp-content/upgrade/
+
+# Fichiers inutiles
+*.sql
+*.log
+*.zip
+
+# Fichiers système
+.DS_Store
+Thumbs.db
