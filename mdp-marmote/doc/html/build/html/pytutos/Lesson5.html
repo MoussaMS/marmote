@@ -1,0 +1,674 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lesson 5: Predefined Markov Chains &mdash; Marmote initial documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css?v=2aa19091" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=51ad5368"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="MDP Lesson 1: discounted MDP" href="MDP_Lesson1.html" />
+    <link rel="prev" title="Lesson 4: working with Distributions" href="Lesson4.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Marmote
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../instructions.html">Installation instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cpp_api.html">C++ API</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../python_api.html">Python API</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../python_examples.html"> Python tutorial</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="Lesson1.html">Lesson 1: making Markov chains</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Lesson2.html">Lesson 2: solving Markov chains</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Lesson3.html">Lesson 3: working with state spaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Lesson4.html">Lesson 4: working with Distributions</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Lesson 5: Predefined Markov Chains</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#The-continuous-time-birth-death-process">The continuous-time birth-death process</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Arrival-processes">Arrival processes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="MDP_Lesson1.html">MDP Lesson 1: discounted MDP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="MDP_Lesson2.html">MDP Lesson 2: additional methods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="MDP_Lesson3.html">MDP Lesson 3: average MDP and policy handling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="MDP_Lesson4.html">MDP Lesson 4: Total Reward MDP with two-dimensional state space</a></li>
+<li class="toctree-l3"><a class="reference internal" href="App_Lesson1.html">Application Lesson 1: Application to Mitrani’s hysteresis model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="App_Lesson2.html">Application Lesson 2: Application to the control of a tandem multi server system</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../python_downloads.html"> Files for download</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python_api.html#topics">Topics</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../about.html">About Marmote and MarmoteMDP</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Marmote</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../python_api.html">Python API</a></li>
+          <li class="breadcrumb-item"><a href="../python_examples.html">Python Tutorial and Examples</a></li>
+      <li class="breadcrumb-item active">Lesson 5: Predefined Markov Chains</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/pytutos/Lesson5.ipynb.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="Lesson-5:-Predefined-Markov-Chains">
+<h1>Lesson 5: Predefined Markov Chains<a class="headerlink" href="#Lesson-5:-Predefined-Markov-Chains" title="Link to this heading"></a></h1>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">marmote.core</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">marmotecore</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">marmote.markovchain</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">mmc</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+</pre></div>
+</div>
+</div>
+<p>Some of the well-known Markov models are implemented in <code class="docutils literal notranslate"><span class="pre">Marmote</span></code> as objects heritating from <code class="docutils literal notranslate"><span class="pre">MarkovChain</span></code>. Their current list is:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">TwoStateDiscrete</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">TwoStateContinuous</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Homogeneous1DRandomWalk</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Homogeneous1DBirthDeath</span></code></p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">PoissonProcess</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">HomogeneousMultiDRandomWalk</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">HomogeneousMultiDBirthDeath</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MMPP</span></code></p></li>
+</ul>
+<section id="The-continuous-time-birth-death-process">
+<h2>The continuous-time birth-death process<a class="headerlink" href="#The-continuous-time-birth-death-process" title="Link to this heading"></a></h2>
+<section id="Infinite-state-birth-death-process">
+<h3>Infinite-state birth-death process<a class="headerlink" href="#Infinite-state-birth-death-process" title="Link to this heading"></a></h3>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mc</span> <span class="o">=</span> <span class="n">mmc</span><span class="o">.</span><span class="n">Homogeneous1DBirthDeath</span><span class="p">(</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Although it has theoretically an infinite state space, this chain can be simulated.</p>
+<p>Simulating the chain with options:</p>
+<ul class="simple">
+<li><p>10.0 units of time</p></li>
+<li><p>no stats collected</p></li>
+<li><p>no trajectory kept in memory</p></li>
+<li><p>trajectory printed along the way</p></li>
+<li><p>increments in times displayed as well</p></li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">simres</span> <span class="o">=</span> <span class="n">mc</span><span class="o">.</span><span class="n">SimulateChain</span><span class="p">(</span> <span class="mf">10.0</span><span class="p">,</span> <span class="n">stats</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">traj</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">_print</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">withIncrements</span><span class="o">=</span><span class="kc">True</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[   0]     0.000000        0   0.000000
+[   1]     3.373912        1   3.373912
+[   2]     3.421189        0   0.047277
+[   3]     4.869436        1   1.448248
+[   4]     5.627942        2   0.758506
+[   5]     5.866810        3   0.238867
+[   6]     6.348972        2   0.482162
+[   7]     6.482716        1   0.133744
+[   8]     6.946735        0   0.464019
+[   9]     7.604426        1   0.657691
+[  10]     8.506338        0   0.901911
+[  11]    10.000000        1   1.493662
+</pre></div></div>
+</div>
+<p>Computing the stationary distribution. It is well-known that this distribution is geometric.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">stadis</span> <span class="o">=</span> <span class="n">mc</span><span class="o">.</span><span class="n">StationaryDistribution</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">stadis</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">stadis</span><span class="o">.</span><span class="n">Mean</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">stadis</span><span class="o">.</span><span class="n">getProba</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">stadis</span><span class="o">.</span><span class="n">getProba</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">stadis</span><span class="o">.</span><span class="n">Ccdf</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Geometric on N with proba      0.5: P(k) = 0.5 x (0.5)^k, k=0..+oo
+1.0
+0.5
+0.25
+0.03125
+</pre></div></div>
+</div>
+<p>Embedding and Uniformizing.</p>
+<p>Uniformizing results in another well-known Markov chain.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">umc</span> <span class="o">=</span> <span class="n">mc</span><span class="o">.</span><span class="n">Uniformize</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">umc</span><span class="o">.</span><span class="n">className</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Homogeneous1DRandomWalk
+</pre></div></div>
+</div>
+<p>However embedding does not result in a standard Markov chain.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mc</span><span class="o">.</span><span class="n">Embed</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Warning in Homogeneous1DBirthDeath::Embed(): no structure available for embedding. null result returned.
+</pre></div></div>
+</div>
+</section>
+<section id="Finite-space-birth-death-proces">
+<h3>Finite-space birth-death proces<a class="headerlink" href="#Finite-space-birth-death-proces" title="Link to this heading"></a></h3>
+<p>A birth-death process with 11 states</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mcf</span> <span class="o">=</span> <span class="n">mmc</span><span class="o">.</span><span class="n">Homogeneous1DBirthDeath</span><span class="p">(</span> <span class="mi">11</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.8</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">stadisf</span> <span class="o">=</span> <span class="n">mcf</span><span class="o">.</span><span class="n">StationaryDistribution</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">stadisf</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Discrete distribution values { 0  1  2  3  4  5  6  7  8  9  10  } probas {   0.5002   0.2501   0.1251  0.06253  0.03127  0.01563 0.007816 0.003908 0.001954 0.000977 0.0004885 }
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">stadisf</span><span class="o">.</span><span class="n">Mean</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">stadisf</span><span class="o">.</span><span class="n">getProba</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">stadisf</span><span class="o">.</span><span class="n">getProba</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">stadisf</span><span class="o">.</span><span class="n">Ccdf</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+0.9946262823644356
+0.5002442598925256
+0.2501221299462628
+0.030776746458231585
+</pre></div></div>
+</div>
+<p>Investigating hitting times.</p>
+<p>First set up the hitting set. Here, states 3 and 7 are in the set: [ - - - X - - - X - - - ]</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hitSet</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span> <span class="p">[</span><span class="mi">11</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+<span class="n">hitSet</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">hitSet</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">hitSet</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[False False False  True False False False  True False False False]
+</pre></div></div>
+</div>
+<p>Average hitting times are computed (numerically in this case).</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">avg</span> <span class="o">=</span> <span class="n">mcf</span><span class="o">.</span><span class="n">AverageHittingTime</span><span class="p">(</span> <span class="n">hitSet</span> <span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">avg</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[27.5        25.         17.5         0.          1.83333333  3.
+  2.83333333  0.          2.1875      4.0625      5.3125    ]
+</pre></div></div>
+</div>
+<p>Also available, joint expected hitting time and hitting state: E( tau * ind(X(tau)=s) )</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">avgcon</span> <span class="o">=</span> <span class="n">mcf</span><span class="o">.</span><span class="n">AverageHittingTime_Conditional</span><span class="p">(</span> <span class="n">hitSet</span> <span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span> <span class="n">avgcon</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span><span class="mi">2</span><span class="p">:</span><span class="mi">8</span><span class="p">]</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[[ 0.         27.5         0.          0.          0.          0.        ]
+ [ 0.         25.          0.          0.          0.          0.        ]
+ [ 0.         17.5         0.          0.          0.          0.        ]
+ [ 0.          0.          0.          0.          0.          0.        ]
+ [ 0.          1.57777778  0.          0.          0.          0.25555556]
+ [ 0.          2.4         0.          0.          0.          0.6       ]
+ [ 0.          2.04444444  0.          0.          0.          0.78888889]
+ [ 0.          0.          0.          0.          0.          0.        ]
+ [ 0.          0.          0.          0.          0.          2.1875    ]
+ [ 0.          0.          0.          0.          0.          4.0625    ]]
+</pre></div></div>
+</div>
+<p>Also available: simulation of hitting times.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">simres</span> <span class="o">=</span> <span class="n">mcf</span><span class="o">.</span><span class="n">SimulateHittingTime</span><span class="p">(</span> <span class="mi">0</span><span class="p">,</span> <span class="n">hitSet</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">10000</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">simres</span><span class="o">.</span><span class="n">Diagnose</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+# Simulation result
+# Time type: continuous
+# Keeps a trajectory of size 20
+# DT trajectory size: 0
+# CT trajectory size: 20
+# Last state: 0
+# Last time:  12.269390
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">simres</span><span class="o">.</span><span class="n">CT_dates</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[27.32613419  2.44568247  1.05618749  7.25109476  4.47121101 10.19021112
+ 92.8707826   6.30537834 16.21055573 38.51771831 55.36265299  5.69199989
+  7.63564756 26.88902048  4.51929826 26.23428614  6.88354048 15.6616673
+ 29.28704501 12.26938997]
+</pre></div></div>
+</div>
+</section>
+<section id="Multidimensional-birth-death">
+<h3>Multidimensional birth-death<a class="headerlink" href="#Multidimensional-birth-death" title="Link to this heading"></a></h3>
+<p>Consider a 3-d birth-death process on a 4 x 4 x 4 box.</p>
+<p>The constructor to <code class="docutils literal notranslate"><span class="pre">HomogeneousMultiDBirthDeath</span></code> has arguments: sizes, birth rates, death rates.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mdbd</span> <span class="o">=</span> <span class="n">mmc</span><span class="o">.</span><span class="n">HomogeneousMultiDBirthDeath</span><span class="p">(</span> <span class="p">[</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span> <span class="p">],</span> <span class="p">[</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span> <span class="p">[</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.2</span> <span class="p">]</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">simres</span> <span class="o">=</span> <span class="n">mdbd</span><span class="o">.</span><span class="n">SimulateChain</span><span class="p">(</span> <span class="mf">10.0</span><span class="p">,</span> <span class="n">stats</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">traj</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">withIncrements</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">_print</span><span class="o">=</span><span class="kc">True</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[   0]     0.000000        0   0.000000 (   0,   0,   0)
+[   1]     1.057601       16   1.057601 (   1,   0,   0)
+[   2]     1.407539       20   0.349938 (   1,   1,   0)
+[   3]     1.853709       16   0.446170 (   1,   0,   0)
+[   4]     2.339213        0   0.485504 (   0,   0,   0)
+[   5]     2.528779        4   0.189566 (   0,   1,   0)
+[   6]     2.578830        0   0.050051 (   0,   0,   0)
+[   7]     3.007722       16   0.428892 (   1,   0,   0)
+[   8]     3.337176       17   0.329454 (   1,   0,   1)
+[   9]     4.380857       21   1.043680 (   1,   1,   1)
+[  10]     5.035321       22   0.654465 (   1,   1,   2)
+[  11]     5.055443       23   0.020121 (   1,   1,   3)
+[  12]     5.611569       27   0.556127 (   1,   2,   3)
+[  13]     5.679364       23   0.067794 (   1,   1,   3)
+[  14]     5.841802        7   0.162438 (   0,   1,   3)
+[  15]     6.504515        6   0.662713 (   0,   1,   2)
+[  16]     6.778746        2   0.274231 (   0,   0,   2)
+[  17]     6.796865        3   0.018119 (   0,   0,   3)
+[  18]     7.182389       19   0.385524 (   1,   0,   3)
+[  19]     7.454535        3   0.272146 (   0,   0,   3)
+[  20]     8.032846       19   0.578311 (   1,   0,   3)
+[  21]     8.372880       23   0.340034 (   1,   1,   3)
+[  22]     8.455506       27   0.082626 (   1,   2,   3)
+[  23]     8.601174       26   0.145668 (   1,   2,   2)
+[  24]     8.631567       27   0.030393 (   1,   2,   3)
+[  25]     9.080563       43   0.448996 (   2,   2,   3)
+[  26]     9.116700       47   0.036137 (   2,   3,   3)
+[  27]     9.245999       43   0.129299 (   2,   2,   3)
+[  28]     9.648527       47   0.402528 (   2,   3,   3)
+[  29]     9.862576       31   0.214049 (   1,   3,   3)
+[  30]    10.000000       15   0.137424 (   0,   3,   3)
+</pre></div></div>
+</div>
+<p>Statistics can be performed on this trajectory also</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sd</span> <span class="o">=</span> <span class="n">simres</span><span class="o">.</span><span class="n">Distribution</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+# State   0:   cum time =     1.676059   ( 16.7606%)
+# State   1:   cum time =     0.000000   (  0.0000%)
+# State   2:   cum time =     0.018119   (  0.1812%)
+# State   3:   cum time =     0.963835   (  9.6383%)
+# State   4:   cum time =     0.050051   (  0.5005%)
+# State   5:   cum time =     0.000000   (  0.0000%)
+# State   6:   cum time =     0.274231   (  2.7423%)
+# State   7:   cum time =     0.662713   (  6.6271%)
+# State   8:   cum time =     0.000000   (  0.0000%)
+# State   9:   cum time =     0.000000   (  0.0000%)
+# State  10:   cum time =     0.000000   (  0.0000%)
+# State  11:   cum time =     0.000000   (  0.0000%)
+# State  12:   cum time =     0.000000   (  0.0000%)
+# State  13:   cum time =     0.000000   (  0.0000%)
+# State  14:   cum time =     0.000000   (  0.0000%)
+# State  15:   cum time =     0.000000   (  0.0000%)
+# State  16:   cum time =     1.164896   ( 11.6490%)
+# State  17:   cum time =     1.043680   ( 10.4368%)
+# State  18:   cum time =     0.000000   (  0.0000%)
+# State  19:   cum time =     0.612180   (  6.1218%)
+# State  20:   cum time =     0.446170   (  4.4617%)
+# State  21:   cum time =     0.654465   (  6.5446%)
+# State  22:   cum time =     0.020121   (  0.2012%)
+# State  23:   cum time =     0.801191   (  8.0119%)
+# State  24:   cum time =     0.000000   (  0.0000%)
+# State  25:   cum time =     0.000000   (  0.0000%)
+# State  26:   cum time =     0.030393   (  0.3039%)
+# State  27:   cum time =     0.662459   (  6.6246%)
+# State  28:   cum time =     0.000000   (  0.0000%)
+# State  29:   cum time =     0.000000   (  0.0000%)
+# State  30:   cum time =     0.000000   (  0.0000%)
+# State  31:   cum time =     0.137424   (  1.3742%)
+# State  32:   cum time =     0.000000   (  0.0000%)
+# State  33:   cum time =     0.000000   (  0.0000%)
+# State  34:   cum time =     0.000000   (  0.0000%)
+# State  35:   cum time =     0.000000   (  0.0000%)
+# State  36:   cum time =     0.000000   (  0.0000%)
+# State  37:   cum time =     0.000000   (  0.0000%)
+# State  38:   cum time =     0.000000   (  0.0000%)
+# State  39:   cum time =     0.000000   (  0.0000%)
+# State  40:   cum time =     0.000000   (  0.0000%)
+# State  41:   cum time =     0.000000   (  0.0000%)
+# State  42:   cum time =     0.000000   (  0.0000%)
+# State  43:   cum time =     0.438664   (  4.3866%)
+# State  44:   cum time =     0.000000   (  0.0000%)
+# State  45:   cum time =     0.000000   (  0.0000%)
+# State  46:   cum time =     0.000000   (  0.0000%)
+# State  47:   cum time =     0.343348   (  3.4335%)
+# State  48:   cum time =     0.000000   (  0.0000%)
+# State  49:   cum time =     0.000000   (  0.0000%)
+# State  50:   cum time =     0.000000   (  0.0000%)
+# State  51:   cum time =     0.000000   (  0.0000%)
+# State  52:   cum time =     0.000000   (  0.0000%)
+# State  53:   cum time =     0.000000   (  0.0000%)
+# State  54:   cum time =     0.000000   (  0.0000%)
+# State  55:   cum time =     0.000000   (  0.0000%)
+# State  56:   cum time =     0.000000   (  0.0000%)
+# State  57:   cum time =     0.000000   (  0.0000%)
+# State  58:   cum time =     0.000000   (  0.0000%)
+# State  59:   cum time =     0.000000   (  0.0000%)
+# State  60:   cum time =     0.000000   (  0.0000%)
+# State  61:   cum time =     0.000000   (  0.0000%)
+# State  62:   cum time =     0.000000   (  0.0000%)
+# State  63:   cum time =     0.000000   (  0.0000%)
+</pre></div></div>
+</div>
+</section>
+</section>
+<section id="Arrival-processes">
+<h2>Arrival processes<a class="headerlink" href="#Arrival-processes" title="Link to this heading"></a></h2>
+<p>There are two pure arrival processes in <code class="docutils literal notranslate"><span class="pre">Marmote</span></code>: <code class="docutils literal notranslate"><span class="pre">PoissonProcess</span></code> and <code class="docutils literal notranslate"><span class="pre">MMPP</span></code>.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">poi</span> <span class="o">=</span> <span class="n">mmc</span><span class="o">.</span><span class="n">PoissonProcess</span><span class="p">(</span> <span class="mf">1.0</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">simres</span> <span class="o">=</span> <span class="n">poi</span><span class="o">.</span><span class="n">SimulateChain</span><span class="p">(</span> <span class="mf">10.0</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[   0]     0.000000        0   0.000000
+[   1]     1.191349        1   1.191349
+[   2]     1.601412        2   0.410064
+[   3]     1.871647        3   0.270235
+[   4]     2.701199        4   0.829552
+[   5]     3.433952        5   0.732753
+[   6]     3.567857        6   0.133904
+[   7]     5.128728        7   1.560871
+[   8]     5.624811        8   0.496083
+[   9]     6.024166        9   0.399354
+[  10]     7.399286       10   1.375120
+[  11]     8.297379       11   0.898093
+[  12]     8.968802       12   0.671423
+[  13]     9.495159       13   0.526357
+[  14]    10.000000       14   0.504841
+</pre></div></div>
+</div>
+<p>Creating an MMPP with modulating chain the 8-state birth-death of this lesson. Arrival rates are 0 except in states 1 and 7.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mmpp</span> <span class="o">=</span> <span class="n">mmc</span><span class="o">.</span><span class="n">MMPP</span><span class="p">(</span> <span class="n">mcf</span><span class="o">.</span><span class="n">generator</span><span class="p">(),</span> <span class="p">[</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span> <span class="p">]</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Simulation stating from 0 arrivals and state 0 of the environment.</p>
+<p>Coding of ‘state’ trajectory (experimental) is 2*nb of arrivals + current state of the environment.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">simres</span> <span class="o">=</span> <span class="n">mmpp</span><span class="o">.</span><span class="n">SimulateChain</span><span class="p">(</span> <span class="mf">10.0</span><span class="p">,</span> <span class="n">marmotecore</span><span class="o">.</span><span class="n">DiracDistribution</span><span class="p">(</span><span class="mf">0.0</span><span class="p">),</span> <span class="n">marmotecore</span><span class="o">.</span><span class="n">DiracDistribution</span><span class="p">(</span><span class="mf">0.0</span><span class="p">),</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[   0]     0.000000        0   0.000000
+[   1]     5.661661        1   5.661661
+[   2]     5.691483        0   0.029821
+[   3]     5.888489        1   0.197006
+[   4]     6.613527        0   0.725039
+[   5]     9.433967        1   2.820439
+[   6]     9.774648        0   0.340681
+[   7]    10.000000        1   0.225352
+</pre></div></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Lesson4.html" class="btn btn-neutral float-left" title="Lesson 4: working with Distributions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="MDP_Lesson1.html" class="btn btn-neutral float-right" title="MDP Lesson 1: discounted MDP" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, 2024, ajm and eh.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,686 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Example MDP 30 &mdash; Marmote initial documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=51ad5368"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Example MDP 31" href="exampleMDP31.html" />
+    <link rel="prev" title="Example MDP 22" href="exampleMDP22.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Marmote
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../instructions.html">Installation instructions</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../cpp_api.html">C++ API</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../cpp_examples.html"> Commented examples</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="example1.html">Example 1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="example2.html">Example 2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="example3.html">Example 3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="example4.html">Example 4</a></li>
+<li class="toctree-l3"><a class="reference internal" href="example5.html">Example 5</a></li>
+<li class="toctree-l3"><a class="reference internal" href="example6.html">Example 6</a></li>
+<li class="toctree-l3"><a class="reference internal" href="example7.html">Example 7</a></li>
+<li class="toctree-l3"><a class="reference internal" href="example10.html">Example 10</a></li>
+<li class="toctree-l3"><a class="reference internal" href="exampleMDP10.html">MDP Example 10: discounted MDP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="exampleMDP11.html">Example MDP 11</a></li>
+<li class="toctree-l3"><a class="reference internal" href="exampleMDP20.html">Example MDP 20</a></li>
+<li class="toctree-l3"><a class="reference internal" href="exampleMDP21.html">Example MDP 21</a></li>
+<li class="toctree-l3"><a class="reference internal" href="exampleMDP22.html">Example MDP 22</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Example MDP 30</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#description">Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#tasks-performed">Tasks performed:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#code">Code</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#download">Download</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#output">Output</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="exampleMDP31.html">Example MDP 31</a></li>
+<li class="toctree-l3"><a class="reference internal" href="exampleMDP40.html">Example MDP 40</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../cpp_downloads.html"> Files for download</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cpp_api.html#topics">Topics</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../python_api.html">Python API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../about.html">About Marmote and MarmoteMDP</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Marmote</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../cpp_api.html">C++ API</a></li>
+          <li class="breadcrumb-item"><a href="../cpp_examples.html">C++ Tutorial and Examples</a></li>
+      <li class="breadcrumb-item active">Example MDP 30</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/example/exampleMDP30.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="example-mdp-30">
+<h1>Example MDP 30<a class="headerlink" href="#example-mdp-30" title="Link to this heading"></a></h1>
+<p><strong>Infinite Horizon Total reward example.</strong></p>
+<section id="description">
+<h2>Description<a class="headerlink" href="#description" title="Link to this heading"></a></h2>
+<p>This example is based on the Stochastic Shortest Path defined in the journal  <a class="reference external" href="https://www.tangente-mag.com/numero.php?id=189">Tangente:</a> number 75 about Operationnel Research (in french). It represents the choices of a schoolboy from house to highschool and the traveling times.</p>
+<p>The MDP can be represented by (in french)</p>
+<a class="reference internal image-reference" href="_images/PlusCourtChemin2.jpg"><img alt="picture of the SSP MDP" class="align-center" src="_images/PlusCourtChemin2.jpg" />
+<aside class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<span class="docutils literal">/home/moussa/licence3/doc/html/source/example/exampleMDP30.rst</span>, line 13)</p>
+<p>Cannot scale image!
+  Could not get size from &quot;_images/PlusCourtChemin2.jpg&quot;:
+  [Errno 2] No such file or directory: '_images/PlusCourtChemin2.jpg'</p>
+</aside>
+</a>
+<div class="line-block">
+<div class="line"><br /></div>
+<div class="line">The <em>state space</em> is the set of <em>blue circles</em>.</div>
+<div class="line">The <em>action space</em> is the set of <em>brown squares</em>.</div>
+<div class="line"><br /></div>
+<div class="line">There are 9 states and 8 actions</div>
+</div>
+<p>In this way we <em>build an MDP object without the vector of transition matrices</em>. The transition matrices are added after the building of the <cite>TotalRewardMDP</cite>.</p>
+</section>
+<section id="tasks-performed">
+<h2>Tasks performed:<a class="headerlink" href="#tasks-performed" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>We create a <cite>totalRewardMDP</cite> object by</p></li>
+</ol>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">TotalRewardMDP</span><span class="w"> </span><span class="o">*</span><span class="n">mdpSSP</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">TotalRewardMDP</span><span class="p">(</span><span class="n">critere</span><span class="p">,</span><span class="w"> </span><span class="n">stateSpace</span><span class="p">,</span><span class="w"> </span><span class="n">actionSpace</span><span class="p">,</span><span class="w"> </span><span class="n">Cost</span><span class="p">);</span>
+<span class="cm">/* where critere is the criteria, stateSpace the state space, actionSpace the action Sace and Cost the cost matrix */</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>We run <cite>valueIteration</cite> for 5 steps</p></li>
+</ol>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">maxIter</span><span class="o">=</span><span class="mi">5</span><span class="p">;</span>
+<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&quot;Printing solution from value iteration&quot;</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&quot;Done : path length  &quot;</span><span class="o">&lt;&lt;</span><span class="n">maxIter</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+<span class="n">SolutionMDP</span><span class="w"> </span><span class="o">*</span><span class="n">optimum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mdpSSP</span><span class="o">-&gt;</span><span class="n">ValueIteration</span><span class="p">(</span><span class="n">epsilon</span><span class="p">,</span><span class="w"> </span><span class="n">maxIter</span><span class="p">);</span>
+<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&quot;Print solution&quot;</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+<span class="n">optimum</span><span class="o">-&gt;</span><span class="n">WriteSolution</span><span class="p">();</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>We run <cite>valueIteration</cite> for 50 steps, but only <em>7 steps</em> are required to compute the optimal solution.</p></li>
+</ol>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">maxIter</span><span class="o">=</span><span class="mi">50</span><span class="p">;</span>
+<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&quot;Printing solution from value iteration&quot;</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&quot;Done : path length  &quot;</span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">maxIter</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+<span class="n">SolutionMDP</span><span class="w"> </span><span class="o">*</span><span class="n">optimum2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mdpSSP</span><span class="o">-&gt;</span><span class="n">ValueIteration</span><span class="p">(</span><span class="n">epsilon</span><span class="p">,</span><span class="w"> </span><span class="n">maxIter</span><span class="p">);</span>
+<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&quot;Print solution&quot;</span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="n">optimum2</span><span class="o">-&gt;</span><span class="n">WriteSolution</span><span class="p">();</span>
+</pre></div>
+</div>
+</section>
+<section id="code">
+<h2>Code<a class="headerlink" href="#code" title="Link to this heading"></a></h2>
+<p>The whole code is</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;list&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;vector&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string&gt;</span>
+
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;marmoteCore/marmoteInterval.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;marmoteCore/marmoteSparseMatrix.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;marmoteMDP/marmoteTotalRewardMDP.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;marmoteMDP/marmoteFeedbackSolutionMDP.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;marmoteMDP/marmoteSolutionMDP.h&quot;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">**</span><span class="w"> </span><span class="n">argv</span><span class="w"> </span><span class="p">)</span>
+<span class="p">{</span>
+<span class="cm">/*Create the MDP object to test 1-dimension example and fill all its fields. */</span>
+
+<span class="c1">// create a penalties for non avaiable action (we should use the limit values but we do not this).</span>
+<span class="kt">double</span><span class="w"> </span><span class="n">peno</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">+</span><span class="mi">10000000000</span><span class="p">;</span>
+
+
+<span class="kt">int</span><span class="w"> </span><span class="n">dim_SS</span><span class="p">;</span><span class="w"> </span><span class="cm">/* define dimension of the state space */</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">dim_AS</span><span class="p">;</span><span class="w"> </span><span class="cm">/* define dimension of the action space */</span>
+
+<span class="c1">// create the state space as an interval between 0 and 8</span>
+<span class="n">MarmoteInterval</span><span class="w"> </span><span class="o">*</span><span class="n">stateSpace</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MarmoteInterval</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">8</span><span class="p">);</span>
+<span class="c1">// create the action space as an interval between 0 and 7</span>
+<span class="n">MarmoteInterval</span><span class="w"> </span><span class="o">*</span><span class="n">actionSpace</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MarmoteInterval</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">7</span><span class="p">);</span>
+
+<span class="c1">// compute the size of the cardinal and store it in variable dim_SS</span>
+<span class="n">dim_SS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">stateSpace</span><span class="o">-&gt;</span><span class="n">Cardinal</span><span class="p">();</span>
+<span class="n">dim_AS</span><span class="w"> </span><span class="o">=</span><span class="n">actionSpace</span><span class="o">-&gt;</span><span class="n">Cardinal</span><span class="p">();</span>
+
+<span class="cm">/* create the matrix for the Cost. This is a dim_SS * dim_AS matrix */</span>
+<span class="n">SparseMatrix</span><span class="w"> </span><span class="o">*</span><span class="n">Cost</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SparseMatrix</span><span class="p">(</span><span class="n">dim_SS</span><span class="p">,</span><span class="w"> </span><span class="n">dim_AS</span><span class="p">);</span>
+<span class="cm">/* fill in the cost matrix */</span>
+<span class="c1">// this gives to the entrie (0,0) the value 15</span>
+<span class="n">Cost</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">15</span><span class="p">);</span>
+<span class="n">Cost</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">);</span>
+<span class="n">Cost</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">);</span>
+<span class="n">Cost</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="n">peno</span><span class="p">);</span>
+<span class="n">Cost</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="n">peno</span><span class="p">);</span>
+<span class="n">Cost</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="n">peno</span><span class="p">);</span>
+<span class="n">Cost</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="n">peno</span><span class="p">);</span>
+<span class="n">Cost</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="n">peno</span><span class="p">);</span>
+
+<span class="n">Cost</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">peno</span><span class="p">);</span>
+<span class="n">Cost</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">peno</span><span class="p">);</span>
+<span class="n">Cost</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">peno</span><span class="p">);</span>
+<span class="n">Cost</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">10</span><span class="p">);</span>
+<span class="n">Cost</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">30</span><span class="p">);</span>
+<span class="n">Cost</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="n">peno</span><span class="p">);</span>
+<span class="n">Cost</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="n">peno</span><span class="p">);</span>
+<span class="n">Cost</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="n">peno</span><span class="p">);</span>
+
+<span class="n">Cost</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">peno</span><span class="p">);</span>
+<span class="n">Cost</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">peno</span><span class="p">);</span>
+<span class="n">Cost</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">peno</span><span class="p">);</span>
+<span class="n">Cost</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="n">peno</span><span class="p">);</span>
+<span class="n">Cost</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">15</span><span class="p">);</span>
+<span class="n">Cost</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="n">peno</span><span class="p">);</span>
+<span class="n">Cost</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="n">peno</span><span class="p">);</span>
+<span class="n">Cost</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="n">peno</span><span class="p">);</span>
+
+<span class="n">Cost</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">peno</span><span class="p">);</span>
+<span class="n">Cost</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">peno</span><span class="p">);</span>
+<span class="n">Cost</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">peno</span><span class="p">);</span>
+<span class="n">Cost</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="n">peno</span><span class="p">);</span>
+<span class="n">Cost</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="n">peno</span><span class="p">);</span>
+<span class="n">Cost</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">10</span><span class="p">);</span>
+<span class="n">Cost</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="n">peno</span><span class="p">);</span>
+<span class="n">Cost</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="n">peno</span><span class="p">);</span>
+
+<span class="n">Cost</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">peno</span><span class="p">);</span>
+<span class="n">Cost</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">peno</span><span class="p">);</span>
+<span class="n">Cost</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">peno</span><span class="p">);</span>
+<span class="n">Cost</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="n">peno</span><span class="p">);</span>
+<span class="n">Cost</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="n">peno</span><span class="p">);</span>
+<span class="n">Cost</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">20</span><span class="p">);</span>
+<span class="n">Cost</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="n">peno</span><span class="p">);</span>
+<span class="n">Cost</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="n">peno</span><span class="p">);</span>
+
+<span class="n">Cost</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">peno</span><span class="p">);</span>
+<span class="n">Cost</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">peno</span><span class="p">);</span>
+<span class="n">Cost</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">peno</span><span class="p">);</span>
+<span class="n">Cost</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="n">peno</span><span class="p">);</span>
+<span class="n">Cost</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="n">peno</span><span class="p">);</span>
+<span class="n">Cost</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">60</span><span class="p">);</span>
+<span class="n">Cost</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="n">peno</span><span class="p">);</span>
+<span class="n">Cost</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="n">peno</span><span class="p">);</span>
+
+<span class="n">Cost</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">peno</span><span class="p">);</span>
+<span class="n">Cost</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">peno</span><span class="p">);</span>
+<span class="n">Cost</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">peno</span><span class="p">);</span>
+<span class="n">Cost</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="n">peno</span><span class="p">);</span>
+<span class="n">Cost</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="n">peno</span><span class="p">);</span>
+<span class="n">Cost</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="n">peno</span><span class="p">);</span>
+<span class="n">Cost</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">5</span><span class="p">);</span>
+<span class="n">Cost</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="n">peno</span><span class="p">);</span>
+
+<span class="n">Cost</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">peno</span><span class="p">);</span>
+<span class="n">Cost</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">peno</span><span class="p">);</span>
+<span class="n">Cost</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">peno</span><span class="p">);</span>
+<span class="n">Cost</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">);</span>
+<span class="n">Cost</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="n">peno</span><span class="p">);</span>
+<span class="n">Cost</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="n">peno</span><span class="p">);</span>
+<span class="n">Cost</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="n">peno</span><span class="p">);</span>
+<span class="n">Cost</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">15</span><span class="p">);</span>
+
+<span class="n">Cost</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">peno</span><span class="p">);</span>
+<span class="n">Cost</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">peno</span><span class="p">);</span>
+<span class="n">Cost</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">peno</span><span class="p">);</span>
+<span class="n">Cost</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="n">peno</span><span class="p">);</span>
+<span class="n">Cost</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="n">peno</span><span class="p">);</span>
+<span class="n">Cost</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="n">peno</span><span class="p">);</span>
+<span class="n">Cost</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+<span class="n">Cost</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="n">peno</span><span class="p">);</span>
+
+
+<span class="cm">/*initialize the criteria */</span>
+<span class="n">string</span><span class="w"> </span><span class="n">critere</span><span class="p">(</span><span class="s">&quot;min&quot;</span><span class="p">);</span>
+
+<span class="c1">//create and initialize epsilon.</span>
+<span class="kt">double</span><span class="w"> </span><span class="n">epsilon</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.00001</span><span class="p">;</span>
+
+<span class="c1">//create and initialize the maximum number of iterations allowed.</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">maxIter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">20</span><span class="p">;</span>
+
+
+<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&quot;Begining of building MDP&quot;</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+<span class="c1">// I create the MDP</span>
+<span class="n">TotalRewardMDP</span><span class="w"> </span><span class="o">*</span><span class="n">mdpSSP</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">TotalRewardMDP</span><span class="p">(</span><span class="n">critere</span><span class="p">,</span><span class="w"> </span><span class="n">stateSpace</span><span class="p">,</span><span class="w"> </span><span class="n">actionSpace</span><span class="p">,</span><span class="w"> </span><span class="n">Cost</span><span class="p">);</span>
+<span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;End of building MDP&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+
+<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&quot;Add matrices&quot;</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+<span class="cm">/* create and fill matrix for the 0 action*/</span>
+<span class="n">SparseMatrix</span><span class="w"> </span><span class="o">*</span><span class="n">P0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SparseMatrix</span><span class="p">(</span><span class="n">dim_SS</span><span class="p">);</span>
+<span class="n">P0</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mf">0.6</span><span class="p">);</span>
+<span class="n">P0</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mf">0.4</span><span class="p">);</span>
+<span class="n">P0</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span><span class="w">  </span><span class="cm">/* fill in the other transitions to have a stochastic matrix */</span>
+<span class="n">P0</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">P0</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">P0</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">P0</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">P0</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">P0</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">P0</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">mdpSSP</span><span class="o">-&gt;</span><span class="n">AddMatrix</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">P0</span><span class="p">);</span>
+<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&quot;Added matrix (action 0)&quot;</span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+
+<span class="cm">/* Create matrix for the action 1*/</span>
+<span class="n">P0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SparseMatrix</span><span class="p">(</span><span class="n">dim_SS</span><span class="p">);</span>
+<span class="n">P0</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mf">0.3</span><span class="p">);</span>
+<span class="n">P0</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mf">0.5</span><span class="p">);</span>
+<span class="n">P0</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mf">0.2</span><span class="p">);</span>
+<span class="n">P0</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span><span class="w">  </span><span class="cm">/* fill in the other transitions to have a stochastic matrix */</span>
+<span class="n">P0</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">P0</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">P0</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">P0</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">P0</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">P0</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">P0</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">mdpSSP</span><span class="o">-&gt;</span><span class="n">AddMatrix</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">P0</span><span class="p">);</span>
+<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&quot;Added matrix (action 1)&quot;</span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+
+<span class="cm">/* matrix for the action 2*/</span>
+<span class="n">P0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SparseMatrix</span><span class="p">(</span><span class="n">dim_SS</span><span class="p">);</span>
+<span class="n">P0</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mf">0.15</span><span class="p">);</span>
+<span class="n">P0</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mf">0.85</span><span class="p">);</span>
+<span class="n">P0</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span><span class="w">  </span><span class="cm">/* fill in the other transitions to have a stochastic matrix */</span>
+<span class="n">P0</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">P0</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">P0</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">P0</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">P0</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">P0</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">P0</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">mdpSSP</span><span class="o">-&gt;</span><span class="n">AddMatrix</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="n">P0</span><span class="p">);</span>
+<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&quot;Added matrix (action 2)&quot;</span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+
+<span class="cm">/* matrix for the action 3*/</span>
+<span class="n">P0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SparseMatrix</span><span class="p">(</span><span class="n">dim_SS</span><span class="p">);</span>
+<span class="n">P0</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">P0</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">P0</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span><span class="w">  </span><span class="cm">/* fill in the other transitions to have a stochastic matrix */</span>
+<span class="n">P0</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">P0</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">P0</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">P0</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">P0</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">P0</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">mdpSSP</span><span class="o">-&gt;</span><span class="n">AddMatrix</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="n">P0</span><span class="p">);</span>
+<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&quot;Added matrix (action 3)&quot;</span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+
+<span class="cm">/* matrix for the  action 4*/</span>
+<span class="n">P0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SparseMatrix</span><span class="p">(</span><span class="n">dim_SS</span><span class="p">);</span>
+<span class="n">P0</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">P0</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">P0</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span><span class="w">  </span><span class="cm">/* fill in the other transitions to have a stochastic matrix */</span>
+<span class="n">P0</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">P0</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">P0</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">P0</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">P0</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">P0</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">mdpSSP</span><span class="o">-&gt;</span><span class="n">AddMatrix</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="n">P0</span><span class="p">);</span>
+<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&quot;Added matrix (action 4)&quot;</span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+
+<span class="cm">/* matrix for the action 5*/</span>
+<span class="n">P0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SparseMatrix</span><span class="p">(</span><span class="n">dim_SS</span><span class="p">);</span>
+<span class="n">P0</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">P0</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">P0</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">P0</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span><span class="w">  </span><span class="cm">/* fill in the other transitions to have a stochastic matrix */</span>
+<span class="n">P0</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">P0</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">P0</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">P0</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">P0</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">mdpSSP</span><span class="o">-&gt;</span><span class="n">AddMatrix</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="n">P0</span><span class="p">);</span>
+<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&quot;Added matrix (action 5)&quot;</span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+
+<span class="cm">/* matrix for the action 6*/</span>
+<span class="n">P0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SparseMatrix</span><span class="p">(</span><span class="n">dim_SS</span><span class="p">);</span>
+<span class="n">P0</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">P0</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">P0</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">P0</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span><span class="w">  </span><span class="cm">/* fill in the other transitions to have a stochastic matrix */</span>
+<span class="n">P0</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">P0</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">P0</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">P0</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">P0</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">mdpSSP</span><span class="o">-&gt;</span><span class="n">AddMatrix</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="n">P0</span><span class="p">);</span>
+<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&quot;Added matrix (action 6)&quot;</span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+
+<span class="cm">/* matrix for the action 7*/</span>
+<span class="n">P0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SparseMatrix</span><span class="p">(</span><span class="n">dim_SS</span><span class="p">);</span>
+<span class="n">P0</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">P0</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span><span class="w">  </span><span class="cm">/* fill in the other transitions to have a stochastic matrix */</span>
+<span class="n">P0</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">P0</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">P0</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">P0</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">P0</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">P0</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">P0</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">mdpSSP</span><span class="o">-&gt;</span><span class="n">AddMatrix</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span><span class="n">P0</span><span class="p">);</span>
+<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&quot;Added matrix (action 7)&quot;</span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+
+<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&quot;Finishing Adding matrixes MDP&quot;</span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+
+<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&quot;Writting MDP&quot;</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+<span class="n">mdpSSP</span><span class="o">-&gt;</span><span class="n">WriteMDP</span><span class="p">();</span>
+
+
+
+<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="o">&lt;&lt;</span><span class="s">&quot;###############################&quot;</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+<span class="n">maxIter</span><span class="o">=</span><span class="mi">5</span><span class="p">;</span>
+<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&quot;Printing solution from value iteration&quot;</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&quot;Done : path length  &quot;</span><span class="o">&lt;&lt;</span><span class="n">maxIter</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+<span class="n">SolutionMDP</span><span class="w"> </span><span class="o">*</span><span class="n">optimum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mdpSSP</span><span class="o">-&gt;</span><span class="n">ValueIteration</span><span class="p">(</span><span class="n">epsilon</span><span class="p">,</span><span class="w"> </span><span class="n">maxIter</span><span class="p">);</span>
+<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&quot;Print solution&quot;</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+<span class="n">optimum</span><span class="o">-&gt;</span><span class="n">WriteSolution</span><span class="p">();</span>
+
+<span class="n">maxIter</span><span class="o">=</span><span class="mi">50</span><span class="p">;</span>
+<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&quot;Printing solution from value iteration&quot;</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&quot;Done : path length  &quot;</span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">maxIter</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+<span class="n">SolutionMDP</span><span class="w"> </span><span class="o">*</span><span class="n">optimum2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mdpSSP</span><span class="o">-&gt;</span><span class="n">ValueIteration</span><span class="p">(</span><span class="n">epsilon</span><span class="p">,</span><span class="w"> </span><span class="n">maxIter</span><span class="p">);</span>
+<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&quot;Print solution&quot;</span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="n">optimum2</span><span class="o">-&gt;</span><span class="n">WriteSolution</span><span class="p">();</span>
+
+<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="o">&lt;&lt;</span><span class="s">&quot;################################&quot;</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+
+<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="o">&lt;&lt;</span><span class="s">&quot;********************************&quot;</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+
+<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&quot;Deleting&quot;</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+<span class="k">delete</span><span class="w"> </span><span class="n">optimum</span><span class="p">;</span>
+<span class="k">delete</span><span class="w"> </span><span class="n">optimum2</span><span class="p">;</span>
+
+<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&quot;Deleting 2&quot;</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+<span class="n">mdpSSP</span><span class="o">-&gt;</span><span class="n">ClearRew</span><span class="p">();</span>
+<span class="k">for</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="mi">7</span><span class="p">;</span><span class="n">i</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">--</span><span class="p">){</span>
+<span class="w">   </span><span class="n">mdpSSP</span><span class="o">-&gt;</span><span class="n">DeleMatrix</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+<span class="p">}</span>
+
+
+<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&quot;Deleting 3&quot;</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+<span class="k">delete</span><span class="w"> </span><span class="n">mdpSSP</span><span class="p">;</span>
+
+
+<span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="download">
+<h2>Download<a class="headerlink" href="#download" title="Link to this heading"></a></h2>
+<p>The source file is <a class="reference download internal" download="" href="../_downloads/ed754180bd982c9b57c820038cad9b79/exampleMDP30.cpp"><code class="xref download docutils literal notranslate"><span class="pre">here</span></code></a></p>
+</section>
+<section id="output">
+<h2>Output<a class="headerlink" href="#output" title="Link to this heading"></a></h2>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Begining of building MDP
+End of building MDP
+Add matrices
+Added matrix (action 0)
+Added matrix (action 1)
+Added matrix (action 2)
+Added matrix (action 3)
+Added matrix (action 4)
+Added matrix (action 5)
+Added matrix (action 6)
+Added matrix (action 7)
+Finishing Adding matrixes MDP
+Writting MDP
+#############################################
+write total Reward MDP
+MDP Criteria : Total reward
+#############################################
+#############################################
+write MDP
+MDP type (discrete,continuous): discrete
+MDP rule (min,max): min
+#############################################
+State space size: 9
+Action space size: 8
+State  dimension: 1
+Action dimension: 1
+#############################################
+Transition matrix per action:
+action: 0
+0  0.6  0.4  0  0  0  0  0  0  
+0  1  0  0  0  0  0  0  0  
+0  0  1  0  0  0  0  0  0  
+0  0  0  1  0  0  0  0  0  
+0  0  0  0  1  0  0  0  0  
+0  0  0  0  0  1  0  0  0  
+0  0  0  0  0  0  1  0  0  
+0  0  0  0  0  0  0  1  0  
+0  0  0  0  0  0  0  0  1  
+action: 1
+0  0  0  0.3  0.5  0.2  0  0  0  
+0  1  0  0  0  0  0  0  0  
+0  0  1  0  0  0  0  0  0  
+0  0  0  1  0  0  0  0  0  
+0  0  0  0  1  0  0  0  0  
+0  0  0  0  0  1  0  0  0  
+0  0  0  0  0  0  1  0  0  
+0  0  0  0  0  0  0  1  0  
+0  0  0  0  0  0  0  0  1  
+action: 2
+0  0  0  0  0  0  0.15  0.85  0  
+0  1  0  0  0  0  0  0  0  
+0  0  1  0  0  0  0  0  0  
+0  0  0  1  0  0  0  0  0  
+0  0  0  0  1  0  0  0  0  
+0  0  0  0  0  1  0  0  0  
+0  0  0  0  0  0  1  0  0  
+0  0  0  0  0  0  0  1  0  
+0  0  0  0  0  0  0  0  1  
+action: 3
+1  0  0  0  0  0  0  0  0  
+1  0  0  0  0  0  0  0  0  
+0  0  1  0  0  0  0  0  0  
+0  0  0  1  0  0  0  0  0  
+0  0  0  0  1  0  0  0  0  
+0  0  0  0  0  1  0  0  0  
+0  0  0  0  0  0  1  0  0  
+1  0  0  0  0  0  0  0  0  
+0  0  0  0  0  0  0  0  1  
+action: 4
+1  0  0  0  0  0  0  0  0  
+0  0  0  0  0  0  0  0  1  
+0  0  0  0  0  0  0  0  1  
+0  0  0  1  0  0  0  0  0  
+0  0  0  0  1  0  0  0  0  
+0  0  0  0  0  1  0  0  0  
+0  0  0  0  0  0  1  0  0  
+0  0  0  0  0  0  0  1  0  
+0  0  0  0  0  0  0  0  1  
+action: 5
+1  0  0  0  0  0  0  0  0  
+0  1  0  0  0  0  0  0  0  
+0  0  1  0  0  0  0  0  0  
+0  0  0  0  0  0  0  0  1  
+0  0  0  0  0  0  0  0  1  
+0  0  0  0  0  0  0  0  1  
+0  0  0  0  0  0  1  0  0  
+0  0  0  0  0  0  0  1  0  
+0  0  0  0  0  0  0  0  1  
+action: 6
+1  0  0  0  0  0  0  0  0  
+0  1  0  0  0  0  0  0  0  
+0  0  1  0  0  0  0  0  0  
+0  0  0  1  0  0  0  0  0  
+0  0  0  0  1  0  0  0  0  
+0  0  0  0  0  1  0  0  0  
+0  0  0  0  0  0  0  0  1  
+0  0  0  0  0  0  0  1  0  
+0  0  0  0  0  0  0  0  1  
+action: 7
+1  0  0  0  0  0  0  0  0  
+0  1  0  0  0  0  0  0  0  
+0  0  1  0  0  0  0  0  0  
+0  0  0  1  0  0  0  0  0  
+0  0  0  0  1  0  0  0  0  
+0  0  0  0  0  1  0  0  0  
+0  0  0  0  0  0  1  0  0  
+0  0  0  0  0  0  1  0  0  
+0  0  0  0  0  0  0  0  1  
+#############################################
+Reward Matrix (state,action):
+15  10  5  1e+10  1e+10  1e+10  1e+10  1e+10  
+1e+10  1e+10  1e+10  10  30  1e+10  1e+10  1e+10  
+1e+10  1e+10  1e+10  1e+10  15  1e+10  1e+10  1e+10  
+1e+10  1e+10  1e+10  1e+10  1e+10  10  1e+10  1e+10  
+1e+10  1e+10  1e+10  1e+10  1e+10  20  1e+10  1e+10  
+1e+10  1e+10  1e+10  1e+10  1e+10  60  1e+10  1e+10  
+1e+10  1e+10  1e+10  1e+10  1e+10  1e+10  5  1e+10  
+1e+10  1e+10  1e+10  5  1e+10  1e+10  1e+10  15  
+1e+10  1e+10  1e+10  1e+10  1e+10  1e+10  0  1e+10  
+#############################################
+#############################################
+
+
+###############################
+Printing solution from value iteration
+Done : path length  5
+#-- Value Iteration -- Done with 5 iterations and final distance=4.25
+Print solution
+#Print solution of an MDP problem 
+#Size of the state space : 9
+
+#############################################
+# Solution of the entered problem model:
+# - column 1: index of the state
+# - column 2: Value function 
+# - column 3: Optimal action 
+#
+  0           22.1125   2
+  1              28.5   3
+  2                15   4
+  3                10   5
+  4                20   5
+  5                60   5
+  6                 5   6
+  7                20   7
+  8                 0   6
+#############################################
+Printing solution from value iteration
+Done : path length  50
+#-- Value Iteration -- Done with 7 iterations and final distance=0
+Print solution
+#Print solution of an MDP problem 
+#Size of the state space : 9
+
+#############################################
+# Solution of the entered problem model:
+# - column 1: index of the state
+# - column 2: Value function 
+# - column 3: Optimal action 
+#
+  0             22.75   2
+  1                30   4
+  2                15   4
+  3                10   5
+  4                20   5
+  5                60   5
+  6                 5   6
+  7                20   7
+  8                 0   6
+#############################################
+
+
+################################
+
+********************************
+Deleting
+Deleting 2
+Deleting 3
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="exampleMDP22.html" class="btn btn-neutral float-left" title="Example MDP 22" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="exampleMDP31.html" class="btn btn-neutral float-right" title="Example MDP 31" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, 2024, ajm and eh.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

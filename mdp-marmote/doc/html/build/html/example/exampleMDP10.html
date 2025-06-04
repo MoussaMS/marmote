@@ -1,0 +1,567 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MDP Lesson 1: discounted MDP &mdash; Marmote initial documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=51ad5368"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Download" href="exampleMDP11.html" />
+    <link rel="prev" title="Example 10" href="example10.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Marmote
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../instructions.html">Installation instructions</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../cpp_api.html">C++ API</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../cpp_examples.html"> Commented examples</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="example1.html">Example 1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="example2.html">Example 2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="example3.html">Example 3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="example4.html">Example 4</a></li>
+<li class="toctree-l3"><a class="reference internal" href="example5.html">Example 5</a></li>
+<li class="toctree-l3"><a class="reference internal" href="example6.html">Example 6</a></li>
+<li class="toctree-l3"><a class="reference internal" href="example7.html">Example 7</a></li>
+<li class="toctree-l3"><a class="reference internal" href="example10.html">Example 10</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">MDP Lesson 1: discounted MDP</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#using-the-library">Using the library</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#build-a-simple-mdp">Build a simple MDP</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#solving-the-mdp">Solving the MDP</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#about-the-solutionmdp-object">About the SolutionMDP object</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#download">Download</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#output">Output</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="exampleMDP11.html">Download</a></li>
+<li class="toctree-l3"><a class="reference internal" href="exampleMDP11.html#output">Output</a></li>
+<li class="toctree-l3"><a class="reference internal" href="exampleMDP20.html">Example MDP 20</a></li>
+<li class="toctree-l3"><a class="reference internal" href="exampleMDP21.html">Example MDP 21</a></li>
+<li class="toctree-l3"><a class="reference internal" href="exampleMDP22.html">Example MDP 22</a></li>
+<li class="toctree-l3"><a class="reference internal" href="exampleMDP30.html">Example MDP 30</a></li>
+<li class="toctree-l3"><a class="reference internal" href="exampleMDP31.html">Example MDP 31</a></li>
+<li class="toctree-l3"><a class="reference internal" href="exampleMDP40.html">Example MDP 40</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../cpp_downloads.html"> Files for download</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cpp_api.html#topics">Topics</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../python_api.html">Python API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../about.html">About Marmote and MarmoteMDP</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Marmote</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../cpp_api.html">C++ API</a></li>
+          <li class="breadcrumb-item"><a href="../cpp_examples.html">C++ Tutorial and Examples</a></li>
+      <li class="breadcrumb-item active">MDP Lesson 1: discounted MDP</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/example/exampleMDP10.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="mdp-lesson-1-discounted-mdp">
+<h1>MDP Lesson 1: discounted MDP<a class="headerlink" href="#mdp-lesson-1-discounted-mdp" title="Link to this heading"></a></h1>
+<p>This lesson shows how to create and solve an infinite-horizon Markov Decision Process (MDP) with discounted criteria.</p>
+<section id="using-the-library">
+<h2>Using the library<a class="headerlink" href="#using-the-library" title="Link to this heading"></a></h2>
+<p>The header files to include for using a discounted MDP are:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;list&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;vector&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string&gt;</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;marmoteCore/marmoteSparseMatrix.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;marmoteCore/marmoteFullMatrix.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;marmoteCore/marmoteInterval.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;marmoteCore/marmoteSet.h&gt;</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;marmoteMDP/marmoteDiscountedMDP.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;marmoteMDP/marmoteFeedbackSolutionMDP.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;marmoteMDP/marmoteSolutionMDP.h&gt;</span>
+</pre></div>
+</div>
+<p>These includes allow using the basic objects from the MarmoteCore library (especially Sets, distributions, matrices…) as well as objects specific to Markov Decision Processes.</p>
+</section>
+<section id="build-a-simple-mdp">
+<h2>Build a simple MDP<a class="headerlink" href="#build-a-simple-mdp" title="Link to this heading"></a></h2>
+<section id="reminders-about-mdp">
+<h3>Reminders about MDP<a class="headerlink" href="#reminders-about-mdp" title="Link to this heading"></a></h3>
+<p>Formally, an MDP is a tuple <em>(S,A,P_a,R)</em> where:</p>
+<ul class="simple">
+<li><p><em>S</em> is the state space</p></li>
+<li><p><em>A</em> is the action space</p></li>
+<li><p><em>P_a</em> is a collection of transition matrices, one matrix per action</p></li>
+<li><p><em>R</em> is a reward (or cost) matrix</p></li>
+</ul>
+</section>
+<section id="description-of-the-example-implemented-here">
+<h3>Description of the example implemented here<a class="headerlink" href="#description-of-the-example-implemented-here" title="Link to this heading"></a></h3>
+<p>We consider a simple model with two states x1=0 and x2=1 and in each state: two actions a1=0 and a2=1.</p>
+<p>The reward matrix is:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">|</span>  <span class="mf">4.5</span> <span class="o">|</span>  <span class="mi">2</span>   <span class="o">|</span>
+<span class="o">|</span> <span class="o">-</span><span class="mf">1.5</span> <span class="o">|</span>  <span class="mf">3.0</span> <span class="o">|</span>
+</pre></div>
+</div>
+<p>where r(x,a) is the entry with row coordinate x and column coordinate a.
+The entry r(x,a) represents the reward when in state x, action a is executed.</p>
+<p>The transition matrices are:</p>
+<p>Transition matrix for action 0:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">|</span>  <span class="mf">0.6</span> <span class="o">|</span>  <span class="mf">0.4</span> <span class="o">|</span>
+<span class="o">|</span>  <span class="mf">0.5</span> <span class="o">|</span>  <span class="mf">0.5</span> <span class="o">|</span>
+</pre></div>
+</div>
+<p>Transition matrix for action 1:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">|</span>  <span class="mf">0.2</span> <span class="o">|</span>  <span class="mf">0.8</span> <span class="o">|</span>
+<span class="o">|</span>  <span class="mf">0.7</span> <span class="o">|</span>  <span class="mf">0.3</span> <span class="o">|</span>
+</pre></div>
+</div>
+</section>
+<section id="elements-of-a-mdp-object">
+<h3>Elements of a MDP object<a class="headerlink" href="#elements-of-a-mdp-object" title="Link to this heading"></a></h3>
+<section id="attributes-of-the-object">
+<h4>Attributes of the object<a class="headerlink" href="#attributes-of-the-object" title="Link to this heading"></a></h4>
+<p>An MDP in Marmote is an object that receives (at least) four important attributes:</p>
+<ol class="arabic simple">
+<li><p>The state space which is a <code class="docutils literal notranslate"><span class="pre">MarmoteSet</span></code> object (an object to handle sets).
+The simplest <code class="docutils literal notranslate"><span class="pre">MarmoteSet</span></code> object is the <code class="docutils literal notranslate"><span class="pre">MarmoteInterval</span></code>. Here we use a <code class="docutils literal notranslate"><span class="pre">MarmoteInterval</span></code> for the state space.</p></li>
+<li><p>The action space which is also a <code class="docutils literal notranslate"><span class="pre">MarmoteSet</span></code> object.
+In our case, it’s also a <code class="docutils literal notranslate"><span class="pre">MarmoteInterval</span></code> object.</p></li>
+<li><p>A vector of transition structures.
+Each entry in the vector corresponds to a <code class="docutils literal notranslate"><span class="pre">TransitionStructure</span></code> associated with a given action.</p>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">TransitionStructure</span></code> at the <em>a</em>-th entry of the list is the <code class="docutils literal notranslate"><span class="pre">TransitionStructure</span></code> associated with the action whose index is <em>a</em>.</p></li>
+<li><p>A <code class="docutils literal notranslate"><span class="pre">TransitionStructure</span></code> describes the transition probability from state <em>i</em> to state <em>j</em>.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">TransitionStructure</span></code> can be a <code class="docutils literal notranslate"><span class="pre">FullMatrix</span></code> or a <code class="docutils literal notranslate"><span class="pre">SparseMatrix</span></code>. Here the <em>(i,j)</em> entry of a matrix gives the probability to move from state with index <em>i</em> to state with index <em>j</em>.</p></li>
+</ul>
+</li>
+<li><p>A reward (or cost).
+This is a <code class="docutils literal notranslate"><span class="pre">TransitionStructure</span></code> (preferably a <code class="docutils literal notranslate"><span class="pre">FullMatrix</span></code>) in which the cost of action <em>a</em> in state <em>x</em> is defined.
+Rows are used for state indexes and columns for action indexes. Thus, the entry with indexes <em>(x,a)</em> represents the cost of action with index <em>a</em> in state with index <em>x</em>.</p></li>
+</ol>
+</section>
+</section>
+<section id="how-to-build-the-discountedmdp-object">
+<h3>How to build the DiscountedMDP object<a class="headerlink" href="#how-to-build-the-discountedmdp-object" title="Link to this heading"></a></h3>
+<section id="create-state-space-and-action-space">
+<h4>Create state space and action space<a class="headerlink" href="#create-state-space-and-action-space" title="Link to this heading"></a></h4>
+<p>Here we create two MarmoteInterval objects for the state space and action space. The following two lines define two intervals ranging from 0 to 1.</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">MarmoteSet</span><span class="o">*</span><span class="w"> </span><span class="n">actionSpace</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MarmoteInterval</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+<span class="n">MarmoteSet</span><span class="o">*</span><span class="w"> </span><span class="n">stateSpace</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MarmoteInterval</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="storing-matrices">
+<h4>Storing matrices<a class="headerlink" href="#storing-matrices" title="Link to this heading"></a></h4>
+<p>A vector is used to store all transition matrices.
+The number of matrices should match the size of the action space.</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">vector</span><span class="o">&lt;</span><span class="n">TransitionStructure</span><span class="o">*&gt;</span><span class="w"> </span><span class="n">trans</span><span class="p">(</span><span class="n">actionSpace</span><span class="o">-&gt;</span><span class="n">Cardinal</span><span class="p">());</span>
+</pre></div>
+</div>
+</section>
+<section id="build-transition-matrices">
+<h4>Build transition matrices<a class="headerlink" href="#build-transition-matrices" title="Link to this heading"></a></h4>
+<p>We now create P0, a SparseMatrix object of size 2x2. The P0 matrix is a transition matrix.</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">SparseMatrix</span><span class="o">*</span><span class="w"> </span><span class="n">P0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SparseMatrix</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The command to initialize an entry is setEntry with the syntax setEntry(row, column, value).
+Thus, the command P0-&gt;setEntry(0, 0, 0.6) assigns the value 0.6 to the entry with index (0, 0) of P0.</p>
+<p>Now we define 4 non-zero entries for the P0 matrix.</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">P0</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.6</span><span class="p">);</span>
+<span class="n">P0</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mf">0.4</span><span class="p">);</span>
+<span class="n">P0</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="p">);</span>
+<span class="n">P0</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="p">);</span>
+
+<span class="n">trans</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">P0</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>We now add a new SparseMatrix. Note that a SparseMatrix is an object from marmote.core.</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">SparseMatrix</span><span class="o">*</span><span class="w"> </span><span class="n">P1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SparseMatrix</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+<span class="n">P1</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.2</span><span class="p">);</span>
+<span class="n">P1</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mf">0.8</span><span class="p">);</span>
+<span class="n">P1</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.7</span><span class="p">);</span>
+<span class="n">P1</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mf">0.3</span><span class="p">);</span>
+
+<span class="n">trans</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">P1</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="build-reward-matrix">
+<h4>Build reward matrix<a class="headerlink" href="#build-reward-matrix" title="Link to this heading"></a></h4>
+<p>We create a FullMatrix object of size 2x2. This matrix is used to store the rewards associated with each (state, action) pair.</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">FullMatrix</span><span class="o">*</span><span class="w"> </span><span class="n">Reward</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">FullMatrix</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The following lines add non-zero values to the Reward matrix. More precisely:</p>
+<ul class="simple">
+<li><p>The first line adds the value 4.5 at position (0, 0) in the matrix.</p></li>
+<li><p>The second line adds the value 2 at position (0, 1) in the matrix.</p></li>
+<li><p>The third line adds the value -1.5 at position (1, 0) in the matrix.</p></li>
+<li><p>The fourth line adds the value 3 at position (1, 1) in the matrix.</p></li>
+</ul>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">Reward</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mf">4.5</span><span class="p">);</span>
+<span class="n">Reward</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span>
+<span class="n">Reward</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mf">-1.5</span><span class="p">);</span>
+<span class="n">Reward</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="additional-parameters-of-the-discounted-mdp">
+<h4>Additional parameters of the discounted MDP<a class="headerlink" href="#additional-parameters-of-the-discounted-mdp" title="Link to this heading"></a></h4>
+<p>Two additional parameters must be entered: beta and criterion</p>
+<ul class="simple">
+<li><p>beta is the discount factor for incorporating future values.</p></li>
+<li><p>criterion indicates the optimization criterion, which is either maximization (“max”) or minimization (“min”).</p></li>
+</ul>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kt">double</span><span class="w"> </span><span class="n">beta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.95</span><span class="p">;</span>
+<span class="n">string</span><span class="w"> </span><span class="n">criterion</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;max&quot;</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="build-a-discounted-mdp">
+<h4>Build a discounted MDP<a class="headerlink" href="#build-a-discounted-mdp" title="Link to this heading"></a></h4>
+<p>We now build a DiscountedMDP object using the constructor, to which we pass the parameters defined in this page. The parameters of a DiscountedMDP are:</p>
+<ul class="simple">
+<li><p>criterion either min or max</p></li>
+<li><p>an object encoding the state space</p></li>
+<li><p>an object encoding the action space</p></li>
+<li><p>a vector of TransitionStructure</p></li>
+<li><p>a reward</p></li>
+<li><p>the discount factor</p></li>
+</ul>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">DiscountedMDP</span><span class="o">*</span><span class="w"> </span><span class="n">mdp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">DiscountedMDP</span><span class="p">(</span><span class="n">criterion</span><span class="p">,</span><span class="w"> </span><span class="n">stateSpace</span><span class="p">,</span><span class="w"> </span><span class="n">actionSpace</span><span class="p">,</span><span class="w"> </span><span class="n">trans</span><span class="p">,</span><span class="w"> </span><span class="n">Reward</span><span class="p">,</span><span class="w"> </span><span class="n">beta</span><span class="p">);</span>
+<span class="n">mdp</span><span class="o">-&gt;</span><span class="n">Write</span><span class="p">();</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="solving-the-mdp">
+<h2>Solving the MDP<a class="headerlink" href="#solving-the-mdp" title="Link to this heading"></a></h2>
+<section id="list-of-solution-methods">
+<h3>List of solution methods<a class="headerlink" href="#list-of-solution-methods" title="Link to this heading"></a></h3>
+<p>We list here the different methods implemented to solve discounted Markov Decision Processes. Details of the methods can be found in the literature. All these methods return a <code class="docutils literal notranslate"><span class="pre">FeedbackSolutionMDP</span></code> object.</p>
+<ol class="arabic simple">
+<li><p><em>Value Iteration</em> method named <code class="docutils literal notranslate"><span class="pre">ValueIteration</span></code></p></li>
+<li><p><em>Value Iteration using Gauss Seidel</em> method named <code class="docutils literal notranslate"><span class="pre">ValueIterationGS</span></code></p></li>
+<li><p>Value Iteration with a given value function to initiate the process named <code class="docutils literal notranslate"><span class="pre">ValueIterationInit</span></code></p></li>
+<li><p>Modified Policy Iteration method named <code class="docutils literal notranslate"><span class="pre">PolicyIterationModified</span></code></p></li>
+<li><p>Modified Policy Iteration with Gauss Seidel method named <code class="docutils literal notranslate"><span class="pre">PolicyIterationModifiedGS</span></code></p></li>
+</ol>
+</section>
+<section id="running-a-solution-method">
+<h3>Running a solution method<a class="headerlink" href="#running-a-solution-method" title="Link to this heading"></a></h3>
+<p>Parameters:</p>
+<ul class="simple">
+<li><p>epsilon: a precision threshold used to determine the convergence of the algorithm. The algorithm continues to iterate as long as the maximal difference between the new values and the old values in a state is greater than epsilon.</p></li>
+<li><p>maxIter: gives the maximum number of allowed iterations.</p></li>
+</ul>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kt">double</span><span class="w"> </span><span class="n">epsilon</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.00001</span><span class="p">;</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">maxIter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">700</span><span class="p">;</span>
+</pre></div>
+</div>
+<section id="value-iteration">
+<h4>Value-iteration<a class="headerlink" href="#value-iteration" title="Link to this heading"></a></h4>
+<p>To run a resolution by iterating the value. In order to find both the optimal policy and the optimal value in each of the states. The method returns a stationary solution.
+The function returns a FeedbackSolutionMDP object.</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">FeedbackSolutionMDP</span><span class="o">*</span><span class="w"> </span><span class="n">optimum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mdp</span><span class="o">-&gt;</span><span class="n">ValueIteration</span><span class="p">(</span><span class="n">epsilon</span><span class="p">,</span><span class="w"> </span><span class="n">maxIter</span><span class="p">);</span>
+<span class="n">optimum</span><span class="o">-&gt;</span><span class="n">Write</span><span class="p">();</span>
+</pre></div>
+</div>
+</section>
+<section id="gauss-seidel-value-iteration">
+<h4>Gauss Seidel Value Iteration<a class="headerlink" href="#gauss-seidel-value-iteration" title="Link to this heading"></a></h4>
+<p>The following line performs ten value iterations on the MDP to find the optimal policy and the optimal state values, but now using the Gauss-Seidel improvement to evaluate the value in a state.</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">FeedbackSolutionMDP</span><span class="o">*</span><span class="w"> </span><span class="n">optimum2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mdp</span><span class="o">-&gt;</span><span class="n">ValueIterationGS</span><span class="p">(</span><span class="n">epsilon</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">);</span>
+<span class="n">optimum2</span><span class="o">-&gt;</span><span class="n">Write</span><span class="p">();</span>
+</pre></div>
+</div>
+</section>
+<section id="value-iteration-init">
+<h4>Value Iteration Init<a class="headerlink" href="#value-iteration-init" title="Link to this heading"></a></h4>
+<p>It is also possible to choose which value function will be used to start the value iteration process. To do this, a third parameter must be entered, which is a FeedbackSolution object whose value attribute will be used (see later for details on FeedbackSolution) to initiate the process.</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">FeedbackSolutionMDP</span><span class="o">*</span><span class="w"> </span><span class="n">optimum3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mdp</span><span class="o">-&gt;</span><span class="n">ValueIterationInit</span><span class="p">(</span><span class="n">epsilon</span><span class="p">,</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="n">optimum2</span><span class="p">);</span>
+<span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Optimum 3&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="n">optimum3</span><span class="o">-&gt;</span><span class="n">Write</span><span class="p">();</span>
+</pre></div>
+</div>
+</section>
+<section id="policy-iteration-modified">
+<h4>Policy Iteration Modified<a class="headerlink" href="#policy-iteration-modified" title="Link to this heading"></a></h4>
+<p>In a policy-based approach, it is possible to evaluate a policy with a given precision that is not the same as the precision used to stop the process.
+Please note that there is no implementation of the Policy Iteration algorithm. Instead, the variant called Policy Iteration Modified in Puterman’s book has been implemented.
+Thus, for Policy Iteration Modified, the third and fourth parameters will be the precision with which a policy will be evaluated and the maximum number of iterations allowed to approximate the value.</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">FeedbackSolutionMDP</span><span class="o">*</span><span class="w"> </span><span class="n">optimum4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mdp</span><span class="o">-&gt;</span><span class="n">PolicyIterationModified</span><span class="p">(</span><span class="n">epsilon</span><span class="p">,</span><span class="w"> </span><span class="n">maxIter</span><span class="p">,</span><span class="w"> </span><span class="mf">0.001</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">);</span>
+<span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;optimum4&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="n">optimum4</span><span class="o">-&gt;</span><span class="n">Write</span><span class="p">();</span>
+</pre></div>
+</div>
+</section>
+<section id="printing-information-during-the-solving-process">
+<h4>Printing Information during the solving process<a class="headerlink" href="#printing-information-during-the-solving-process" title="Link to this heading"></a></h4>
+<p>The following instruction modifies the display of internal information during the solving methods, such as the number of iterations performed and the achieved precision.</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">mdp</span><span class="o">-&gt;</span><span class="n">changeVerbosity</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="policy-iteration-modified-with-gauss-seidel">
+<h4>Policy Iteration Modified with Gauss Seidel<a class="headerlink" href="#policy-iteration-modified-with-gauss-seidel" title="Link to this heading"></a></h4>
+<p>The Policy Iteration method can use (as described in Puterman’s book) a Gauss Seidel evaluation. Please note that Policy Iteration Modified With Gauss Seidel Evaluation is not proven for all criteria (but it is for discounted criteria).</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">FeedbackSolutionMDP</span><span class="o">*</span><span class="w"> </span><span class="n">optimum5</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mdp</span><span class="o">-&gt;</span><span class="n">PolicyIterationModifiedGS</span><span class="p">(</span><span class="n">epsilon</span><span class="p">,</span><span class="w"> </span><span class="n">maxIter</span><span class="p">,</span><span class="w"> </span><span class="mf">0.001</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">);</span>
+<span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;last test&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="n">optimum5</span><span class="o">-&gt;</span><span class="n">Write</span><span class="p">();</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="about-the-solutionmdp-object">
+<h2>About the SolutionMDP object<a class="headerlink" href="#about-the-solutionmdp-object" title="Link to this heading"></a></h2>
+<p>The solution is stored with a <code class="docutils literal notranslate"><span class="pre">FeedbackSolutionMDP</span></code> object. This object has attributes that store a value and an action for each state.
+Printing a <code class="docutils literal notranslate"><span class="pre">FeedbackSolutionMDP</span></code> first displays information about the policy. The information for all states in the state space is then displayed. All information for a state is displayed on one line, starting with the state index, the state value and the action associated with the value.</p>
+<section id="clean-up">
+<h3>Clean up<a class="headerlink" href="#clean-up" title="Link to this heading"></a></h3>
+<p>Memory cleanup: first <code class="docutils literal notranslate"><span class="pre">ClearRew</span></code> to clean up the reward (and thus the <cite>Reward</cite> matrix) then delete the <cite>mdp</cite>.</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">mdp</span><span class="o">-&gt;</span><span class="n">ClearRew</span><span class="p">();</span>
+
+<span class="k">delete</span><span class="w"> </span><span class="n">mdp</span><span class="p">;</span>
+<span class="k">delete</span><span class="w"> </span><span class="n">optimum</span><span class="p">;</span>
+<span class="k">delete</span><span class="w"> </span><span class="n">optimum2</span><span class="p">;</span>
+<span class="k">delete</span><span class="w"> </span><span class="n">optimum3</span><span class="p">;</span>
+<span class="k">delete</span><span class="w"> </span><span class="n">optimum4</span><span class="p">;</span>
+<span class="k">delete</span><span class="w"> </span><span class="n">optimum5</span><span class="p">;</span>
+<span class="k">delete</span><span class="w"> </span><span class="n">actionSpace</span><span class="p">;</span>
+<span class="k">delete</span><span class="w"> </span><span class="n">stateSpace</span><span class="p">;</span>
+<span class="k">delete</span><span class="w"> </span><span class="n">P0</span><span class="p">;</span>
+<span class="k">delete</span><span class="w"> </span><span class="n">P1</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="download">
+<h2>Download<a class="headerlink" href="#download" title="Link to this heading"></a></h2>
+<p>The source file can be downloaded <a class="reference download internal" download="" href="../_downloads/f342dc6be3d7e92d9fd3090751092d61/exampleMDP10.cpp"><code class="xref download docutils literal notranslate"><span class="pre">here</span></code></a>.</p>
+</section>
+<section id="output">
+<h2>Output<a class="headerlink" href="#output" title="Link to this heading"></a></h2>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>3
+Begining MDP building
+End of building MDP
+printing MDP
+#############################################
+write MDP
+MDP type (discrete,continuous): discrete
+MDP rule (min,max): max
+#############################################
+State space size: 2
+Action space size: 2
+State  dimension: 1
+Action dimension: 1
+#############################################
+Transition matrix per action:
+action: 0
+0.2  0.8  
+0.4  0.6  
+action: 1
+0.5  0.5  
+0.7  0.3  
+#############################################
+Reward Matrix (state,action):
+0.725  4.025  
+3.125  2.025  
+#############################################
+#############################################
+#############################################
+write Infinite Discounted MDP
+MDP Criteria : infinite discounted
+Discount factor:0.7
+#############################################
+Printing solution from value iteration
+#-- Value Iteration -- Done with 42 iterations and final distance=1.57101e-06
+#Print solution of an MDP problem 
+#Size of the state space : 2
+
+#############################################
+# Solution of the entered problem model:
+# - column 1: index of the state
+# - column 2: Value function 
+# - column 3: Optimal action 
+#
+  0           12.2876   1
+  1           11.3199   0
+#############################################
+
+Checking solutions
+#-- Cost policy -- Done with 2 iterations and final distance=9.85337e-07
+i= 0 sol= 12.2876
+i= 1 sol= 11.3199
+Printing solution from modified value iteration
+#-- Policy Iteration Modified -- Done with 10 iterations and final distance=1.24789e-06
+#Print solution of an MDP problem 
+#Size of the state space : 2
+
+#############################################
+# Solution of the entered problem model:
+# - column 1: index of the state
+# - column 2: Value function 
+# - column 3: Optimal action 
+#
+  0           12.2876   1
+  1           11.3199   0
+#############################################
+
+********************************
+
+Building second MDP
+#############################################
+write MDP
+MDP type (discrete,continuous): discrete
+MDP rule (min,max): max
+#############################################
+State space size: 2
+Action space size: 2
+State  dimension: 1
+Action dimension: 1
+#############################################
+Transition matrix per action:
+action: 0
+0.2  0.8  
+0.4  0.6  
+action: 1
+0.5  0.5  
+0.7  0.3  
+#############################################
+Reward Matrix (state,action):
+0.725  4.025  
+3.125  2.025  
+#############################################
+#############################################
+#############################################
+write Infinite Discounted MDP
+MDP Criteria : infinite discounted
+Discount factor:0.7
+#############################################
+Second MDP built and printed
+Printing solution from value iteration (second MDP)
+#-- Value Iteration -- Done with 42 iterations and final distance=1.57101e-06
+#Print solution of an MDP problem 
+#Size of the state space : 2
+
+#############################################
+# Solution of the entered problem model:
+# - column 1: index of the state
+# - column 2: Value function 
+# - column 3: Optimal action 
+#
+  0           12.2876   1
+  1           11.3199   0
+#############################################
+
+Checking solutions
+#-- Cost policy -- Done with 2 iterations and final distance=9.85337e-07
+i= 0 sol= 12.2876
+i= 1 sol= 11.3199
+Printing solution from modified value iteration
+#-- Policy Iteration Modified -- Done with 10 iterations and final distance=1.24789e-06
+#Print solution of an MDP problem 
+#Size of the state space : 2
+
+#############################################
+# Solution of the entered problem model:
+# - column 1: index of the state
+# - column 2: Value function 
+# - column 3: Optimal action 
+#
+  0           12.2876   1
+  1           11.3199   0
+#############################################
+Destructing
+Destructing 2
+Destructing 3
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="example10.html" class="btn btn-neutral float-left" title="Example 10" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="exampleMDP11.html" class="btn btn-neutral float-right" title="Download" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, 2024, ajm and eh.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

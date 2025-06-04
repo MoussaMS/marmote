@@ -1,0 +1,605 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Example MDP 20 &mdash; Marmote initial documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=51ad5368"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Example MDP 21" href="exampleMDP21.html" />
+    <link rel="prev" title="Example MDP 11" href="exampleMDP11.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Marmote
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../instructions.html">Installation instructions</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../cpp_api.html">C++ API</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../cpp_examples.html"> Commented examples</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="example1.html">Example 1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="example2.html">Example 2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="example3.html">Example 3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="example4.html">Example 4</a></li>
+<li class="toctree-l3"><a class="reference internal" href="example5.html">Example 5</a></li>
+<li class="toctree-l3"><a class="reference internal" href="example6.html">Example 6</a></li>
+<li class="toctree-l3"><a class="reference internal" href="example7.html">Example 7</a></li>
+<li class="toctree-l3"><a class="reference internal" href="example10.html">Example 10</a></li>
+<li class="toctree-l3"><a class="reference internal" href="exampleMDP10.html">MDP Example 10: discounted MDP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="exampleMDP11.html">Example MDP 11</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Example MDP 20</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#description">Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#tasks-performed">Tasks performed:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#code">Code</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#output">Output</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#download">Download</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="exampleMDP21.html">Example MDP 21</a></li>
+<li class="toctree-l3"><a class="reference internal" href="exampleMDP22.html">Example MDP 22</a></li>
+<li class="toctree-l3"><a class="reference internal" href="exampleMDP30.html">Example MDP 30</a></li>
+<li class="toctree-l3"><a class="reference internal" href="exampleMDP31.html">Example MDP 31</a></li>
+<li class="toctree-l3"><a class="reference internal" href="exampleMDP40.html">Example MDP 40</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../cpp_downloads.html"> Files for download</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cpp_api.html#topics">Topics</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../python_api.html">Python API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../about.html">About Marmote and MarmoteMDP</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Marmote</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../cpp_api.html">C++ API</a></li>
+          <li class="breadcrumb-item"><a href="../cpp_examples.html">C++ Tutorial and Examples</a></li>
+      <li class="breadcrumb-item active">Example MDP 20</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/example/exampleMDP20.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="example-mdp-20">
+<h1>Example MDP 20<a class="headerlink" href="#example-mdp-20" title="Link to this heading"></a></h1>
+<section id="description">
+<h2>Description<a class="headerlink" href="#description" title="Link to this heading"></a></h2>
+<p>We want to implement a model of MDP proposed by Puterman.</p>
+<p>This is exemple 8.5.3 comes from Puterman book
+<em>Markov Decision Processes: Discrete Stochastic Dynamic Programming</em> (1994).</p>
+<p>It is an averageMDP.
+The state space has dimension 3 and the action space has dimension 3.</p>
+<div class="line-block">
+<div class="line">The results:</div>
+<div class="line">We should have 2.5 as expected cost</div>
+<div class="line">The span has to be equal to 0.147 after 5 iterations</div>
+<div class="line">The span has to be equal to 0.005 after 12 iterations.</div>
+</div>
+</section>
+<section id="tasks-performed">
+<h2>Tasks performed:<a class="headerlink" href="#tasks-performed" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>Create three <code class="docutils literal notranslate"><span class="pre">SparseMatrix</span></code> objects interval</p></li>
+<li><p>Create one <code class="docutils literal notranslate"><span class="pre">SparseMatrix</span></code> for reward with the addings of penalizations to have the same action space by state</p></li>
+<li><p>Create an <code class="docutils literal notranslate"><span class="pre">AverageMDP</span></code> objects</p></li>
+<li><p>Using <em>value iteration</em></p>
+<ul class="simple">
+<li><p>Writing the solution of value iteration after 5 iterates</p></li>
+<li><p>Writing the solution of value iteration after 12 iterates</p></li>
+<li><p>Writing the solution of value iteration</p></li>
+</ul>
+</li>
+<li><p>Using <em>relative value iteration</em> with different state on which we compute the average cost</p></li>
+</ol>
+</section>
+<section id="code">
+<h2>Code<a class="headerlink" href="#code" title="Link to this heading"></a></h2>
+<p>We create an Average criteria MDP</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">AverageMDP</span><span class="w"> </span><span class="o">*</span><span class="n">mdp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">AverageMDP</span><span class="p">(</span><span class="n">critere</span><span class="p">,</span><span class="w"> </span><span class="n">stateSpace</span><span class="p">,</span><span class="w"> </span><span class="n">actionSpace</span><span class="p">,</span><span class="w"> </span><span class="n">trans</span><span class="p">,</span><span class="w"> </span><span class="n">Reward</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>We run the value iteration with 5 iterations (epsilon is the precision above</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">SolutionMDP</span><span class="w"> </span><span class="o">*</span><span class="n">optimum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mdp</span><span class="o">-&gt;</span><span class="n">ValueIteration</span><span class="p">(</span><span class="n">epsilon</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">);</span>
+<span class="n">optimum</span><span class="o">-&gt;</span><span class="n">WriteSolution</span><span class="p">();</span>
+<span class="k">delete</span><span class="w"> </span><span class="n">optimum</span><span class="p">;</span><span class="w"> </span><span class="cm">/* we delete   the solution (since we will reuse the same object) */</span>
+</pre></div>
+</div>
+<p>We select the state whose index is 1 with <code class="docutils literal notranslate"><span class="pre">ChangeIndex</span></code> and we run the <code class="docutils literal notranslate"><span class="pre">relativeValueIteration</span></code></p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">mdp</span><span class="o">-&gt;</span><span class="n">ChangeIndex</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">optimum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mdp</span><span class="o">-&gt;</span><span class="n">RelativeValueIteration</span><span class="p">(</span><span class="n">epsilon</span><span class="p">,</span><span class="w"> </span><span class="n">maxIter</span><span class="p">);</span>
+<span class="n">optimum</span><span class="o">-&gt;</span><span class="n">WriteSolution</span><span class="p">();</span>
+</pre></div>
+</div>
+</section>
+<section id="output">
+<h2>Output<a class="headerlink" href="#output" title="Link to this heading"></a></h2>
+<p>We illustrate here the output of a feedbackpolicy for average model</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Average<span class="w"> </span>Cost<span class="w"> </span><span class="o">(</span>only<span class="w"> </span><span class="k">for</span><span class="w"> </span>average<span class="w"> </span>models<span class="o">)</span><span class="w"> </span>:<span class="w">          </span><span class="m">2</span>.51852
+Solution<span class="w"> </span>of<span class="w"> </span>the<span class="w"> </span>entered<span class="w"> </span>problem<span class="w"> </span>model:
+-<span class="w"> </span>column<span class="w"> </span><span class="m">1</span>:<span class="w"> </span>index<span class="w"> </span>of<span class="w"> </span>the<span class="w"> </span>state
+-<span class="w"> </span>column<span class="w"> </span><span class="m">2</span>:<span class="w"> </span>Value<span class="w"> </span><span class="k">function</span>
+-<span class="w"> </span>column<span class="w"> </span><span class="m">3</span>:<span class="w"> </span>Optimal<span class="w"> </span>action
+
+<span class="m">0</span><span class="w">           </span><span class="m">12</span>.3704<span class="w">   </span><span class="m">0</span>
+<span class="m">1</span><span class="w">           </span><span class="m">11</span>.7778<span class="w">   </span><span class="m">2</span>
+<span class="m">2</span><span class="w">           </span><span class="m">12</span>.8272<span class="w">   </span><span class="m">3</span>
+</pre></div>
+</div>
+<p>Now, the global output of the program is given</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Enumerate State Space:
+
+Enumerate action Set:
+
+Enumerate action Set by index:
+ Action 0 index of Action : 0
+ Action 1 index of Action : 1
+ Action 2 index of Action : 2
+ Action 3 index of Action : 3
+
+Size :	3
+Begining building of MDP
+End of building MDP
+Writing MDP
+#############################################
+write MDP
+MDP type (discrete,continuous): discrete
+MDP rule (min,max): max
+#############################################
+State space size: 3
+Action space size: 4
+State  dimension: 1
+Action dimension: 1
+#############################################
+Transition matrix per action:
+action: 0
+0  0  1  
+0  0  0  
+0  0  0  
+action: 1
+0  1  0  
+0  0  0  
+0  0  0  
+action: 2
+0  0  0  
+1  0  0  
+0  0  0  
+action: 3
+0  0  0  
+0  0  0  
+0.333333  0.333333  0.333334  
+#############################################
+Reward Matrix (state,action):
+2  1  -1000  -1000  
+-1000  -1000  2  -1000  
+-1000  -1000  -1000  3  
+#############################################
+#############################################
+#############################################
+write Average Discounted MDP
+MDP Criteria : average
+#############################################
+
+Writing the solution of value iteration after 5 iterates
+#-- Value Iteration -- Done with 5 iterations and final distance=0.148148
+#Print solution of an MDP problem 
+#Size of the state space : 3
+
+#############################################
+# Average Cost (only for average models) :          2.51852
+# Solution of the entered problem model:
+# - column 1: index of the state
+# - column 2: Value function 
+# - column 3: Optimal action 
+#
+  0           12.3704   0
+  1           11.7778   2
+  2           12.8272   3
+#############################################
+
+Writing the solution of value iteration after 12 iterates
+#-- Value Iteration -- Done with 12 iterations and final distance=0.00445391
+#Print solution of an MDP problem 
+#Size of the state space : 3
+
+#############################################
+# Average Cost (only for average models) :          2.50019
+# Solution of the entered problem model:
+# - column 1: index of the state
+# - column 2: Value function 
+# - column 3: Optimal action 
+#
+  0           29.8327   0
+  1           29.3348   2
+  2           30.3333   3
+#############################################
+
+Writing the solution of value iteration
+#-- Value Iteration -- Done with 27 iterations and final distance=8.57682e-07
+#Print solution of an MDP problem 
+#Size of the state space : 3
+
+#############################################
+# Average Cost (only for average models) :              2.5
+# Solution of the entered problem model:
+# - column 1: index of the state
+# - column 2: Value function 
+# - column 3: Optimal action 
+#
+  0           67.3333   0
+  1           66.8333   2
+  2           67.8333   3
+#############################################
+
+
+Checking solutions
+# Power method Done. With 1 iterations and  final distance: 4.7148e-07
+i= 0 sol= 69.8333
+i= 1 sol= 69.3333
+i= 2 sol= 70.3333
+
+
+Writing solution of relative value iteration  with special state 0
+#-- Relative Value Iteration -- Done with 27 iterations and final distance=8.57682e-07
+#Print solution of an MDP problem 
+#Size of the state space : 3
+
+#############################################
+# Average Cost (only for average models) :              2.5
+# Solution of the entered problem model:
+# - column 1: index of the state
+# - column 2: Value function 
+# - column 3: Optimal action 
+#
+  0             -1000   0
+  1             -1000   2
+  2                 3   3
+#############################################
+
+Writing solution relative value iteration with special state 1
+#-- Relative Value Iteration -- Done with 27 iterations and final distance=8.57682e-07
+#Print solution of an MDP problem 
+#Size of the state space : 3
+
+#############################################
+# Average Cost (only for average models) :              2.5
+# Solution of the entered problem model:
+# - column 1: index of the state
+# - column 2: Value function 
+# - column 3: Optimal action 
+#
+  0             -1000   0
+  1             -1000   2
+  2               3.5   3
+#############################################
+
+Writing solution relative value iteration with special state 2
+#-- Relative Value Iteration -- Done with 27 iterations and final distance=8.57682e-07
+#Print solution of an MDP problem 
+#Size of the state space : 3
+
+#############################################
+# Average Cost (only for average models) :              2.5
+# Solution of the entered problem model:
+# - column 1: index of the state
+# - column 2: Value function 
+# - column 3: Optimal action 
+#
+  0             -1000   0
+  1             -1000   2
+  2               2.5   3
+#############################################
+
+
+Checking solutions
+# Power method Done. With 40 iterations and  final distance: 8.01171e-07
+i= 0  sol= -398.916
+i= 1  sol= -399.416
+i= 2  sol= -398.416
+
+Writing solution modified policy iteration
+#-- Policy Iteration Modified  -- Done with 10 iterations and final distance=4.7148e-07
+#Print solution of an MDP problem 
+#Size of the state space : 3
+
+#############################################
+# Average Cost (only for average models) :              2.5
+# Solution of the entered problem model:
+# - column 1: index of the state
+# - column 2: Value function 
+# - column 3: Optimal action 
+#
+  0           69.8333   0
+  1           69.3333   2
+  2           70.3333   3
+#############################################
+
+
+Checking solutions
+# Power method Done. With 1 iterations and  final distance: 4.43054e-07
+i= 0  sol= 72.3333
+i= 1  sol= 71.8333
+i= 2  sol= 72.8333
+
+
+********************************
+Destruction
+Destruction 2
+Destruction 3
+Size :	3
+Begining building of MDP
+End of building MDP
+Writing MDP
+#############################################
+write MDP
+MDP type (discrete,continuous): discrete
+MDP rule (min,max): max
+#############################################
+State space size: 3
+Action space size: 4
+State  dimension: 1
+Action dimension: 1
+#############################################
+Transition matrix per action:
+action: 0
+0  0  1  
+0  0  0  
+0  0  0  
+action: 1
+0  1  0  
+0  0  0  
+0  0  0  
+action: 2
+0  0  0  
+1  0  0  
+0  0  0  
+action: 3
+0  0  0  
+0  0  0  
+0.333333  0.333333  0.333334  
+#############################################
+Reward Matrix (state,action):
+2  1  -1000  -1000  
+-1000  -1000  2  -1000  
+-1000  -1000  -1000  3  
+#############################################
+#############################################
+#############################################
+write Average Discounted MDP
+MDP Criteria : average
+#############################################
+
+Writing the solution of value iteration after 5 iterates
+#-- Value Iteration -- Done with 5 iterations and final distance=0.148148
+#Print solution of an MDP problem 
+#Size of the state space : 3
+
+#############################################
+# Average Cost (only for average models) :          2.51852
+# Solution of the entered problem model:
+# - column 1: index of the state
+# - column 2: Value function 
+# - column 3: Optimal action 
+#
+  0           12.3704   0
+  1           11.7778   2
+  2           12.8272   3
+#############################################
+
+Writing the solution of value iteration after 12 iterates
+#-- Value Iteration -- Done with 12 iterations and final distance=0.00445391
+#Print solution of an MDP problem 
+#Size of the state space : 3
+
+#############################################
+# Average Cost (only for average models) :          2.50019
+# Solution of the entered problem model:
+# - column 1: index of the state
+# - column 2: Value function 
+# - column 3: Optimal action 
+#
+  0           29.8327   0
+  1           29.3348   2
+  2           30.3333   3
+#############################################
+
+Writing the solution of value iteration
+#-- Value Iteration -- Done with 27 iterations and final distance=8.57682e-07
+#Print solution of an MDP problem 
+#Size of the state space : 3
+
+#############################################
+# Average Cost (only for average models) :              2.5
+# Solution of the entered problem model:
+# - column 1: index of the state
+# - column 2: Value function 
+# - column 3: Optimal action 
+#
+  0           67.3333   0
+  1           66.8333   2
+  2           67.8333   3
+#############################################
+
+
+Checking solutions
+# Power method Done. With 1 iterations and  final distance: 4.7148e-07
+i= 0 sol= 69.8333
+i= 1 sol= 69.3333
+i= 2 sol= 70.3333
+
+
+Writing solution of relative value iteration  with special state 0
+#-- Relative Value Iteration -- Done with 27 iterations and final distance=8.57682e-07
+#Print solution of an MDP problem 
+#Size of the state space : 3
+
+#############################################
+# Average Cost (only for average models) :              2.5
+# Solution of the entered problem model:
+# - column 1: index of the state
+# - column 2: Value function 
+# - column 3: Optimal action 
+#
+  0             -1000   0
+  1             -1000   2
+  2                 3   3
+#############################################
+
+Writing solution relative value iteration with special state 1
+#-- Relative Value Iteration -- Done with 27 iterations and final distance=8.57682e-07
+#Print solution of an MDP problem 
+#Size of the state space : 3
+
+#############################################
+# Average Cost (only for average models) :              2.5
+# Solution of the entered problem model:
+# - column 1: index of the state
+# - column 2: Value function 
+# - column 3: Optimal action 
+#
+  0             -1000   0
+  1             -1000   2
+  2               3.5   3
+#############################################
+
+Writing solution relative value iteration with special state 2
+#-- Relative Value Iteration -- Done with 27 iterations and final distance=8.57682e-07
+#Print solution of an MDP problem 
+#Size of the state space : 3
+
+#############################################
+# Average Cost (only for average models) :              2.5
+# Solution of the entered problem model:
+# - column 1: index of the state
+# - column 2: Value function 
+# - column 3: Optimal action 
+#
+  0             -1000   0
+  1             -1000   2
+  2               2.5   3
+#############################################
+
+
+Checking solutions
+# Power method Done. With 40 iterations and  final distance: 8.01171e-07
+i= 0  sol= -398.916
+i= 1  sol= -399.416
+i= 2  sol= -398.416
+
+Writing solution modified policy iteration
+#-- Policy Iteration Modified  -- Done with 10 iterations and final distance=4.7148e-07
+#Print solution of an MDP problem 
+#Size of the state space : 3
+
+#############################################
+# Average Cost (only for average models) :              2.5
+# Solution of the entered problem model:
+# - column 1: index of the state
+# - column 2: Value function 
+# - column 3: Optimal action 
+#
+  0           69.8333   0
+  1           69.3333   2
+  2           70.3333   3
+#############################################
+
+
+Checking solutions
+# Power method Done. With 1 iterations and  final distance: 4.43054e-07
+i= 0  sol= 72.3333
+i= 1  sol= 71.8333
+i= 2  sol= 72.8333
+
+
+********************************
+Destruction
+Destruction 2
+Destruction 3
+</pre></div>
+</div>
+</section>
+<section id="download">
+<h2>Download<a class="headerlink" href="#download" title="Link to this heading"></a></h2>
+<p>The source file is <a class="reference download internal" download="" href="../_downloads/65c879b5a28aa11a56510bbd457572a7/exampleMDP20.cpp"><code class="xref download docutils literal notranslate"><span class="pre">here</span></code></a></p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="exampleMDP11.html" class="btn btn-neutral float-left" title="Example MDP 11" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="exampleMDP21.html" class="btn btn-neutral float-right" title="Example MDP 21" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, 2024, ajm and eh.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
