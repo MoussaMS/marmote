@@ -17,10 +17,7 @@ C++ Tutorial and Examples
    example/example10
    example/exampleMDP10
    example/exampleMDP11
-   example/exampleMDP20
    example/exampleMDP21
-   example/exampleMDP22
-   example/exampleMDP30
    example/exampleMDP31
    example/exampleMDP40
 
@@ -42,9 +39,6 @@ The following examples to manipulate Markov Decision Process are provided:
 
 * :doc:`ExampleMDP 10: <./example/exampleMDP10>` create a discounted MDP object and describes the generalities about the MDP modelling. It also contains a short presentation of the MDP solver.
 * :doc:`ExampleMDP 11: <./example/exampleMDP11>` create a discounted MDP and illustrate the way to get the same action set for any state. 
-* :doc:`ExampleMDP 20: <./example/exampleMDP20>` create an average MDP.
 * :doc:`ExampleMDP 21: <./example/exampleMDP21>` create an average MDP and illustrate the way to evaluate a policy.
-* :doc:`ExampleMDP 22: <./example/exampleMDP22>` create an average MDP. In this example we create the MDP before and add the matrices after.
-* :doc:`ExampleMDP 30: <./example/exampleMDP30>` create an total Cost MDP for computing a toy Stochastic Shortest Path. 
 * :doc:`ExampleMDP 31: <./example/exampleMDP31>` create an total Cost MDP for computing the well known SSP *four room* and illustrate how to manipulate a **multidimensionnal state space**.
 * :doc:`ExampleMDP 40: <./example/exampleMDP40>` create a finite horizon MDP given by Puterman in his book.

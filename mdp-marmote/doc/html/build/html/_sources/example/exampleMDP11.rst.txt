@@ -1,7 +1,11 @@
-MDP Lesson 2: additional methods
+MDP Example 11: Additional Methods
+==================================
 Description
-We present here an MDP (Markov Decision Process) model with three states (s1, s2, s3) and three actions (a0, a1, a2). The transition probabilities and rewards are described by the figure below.
+-----------
+We want to implement the model of MDP proposed by A. Geron in the book
+*Hands-On Machine Learning With Scikit-Learn and Tensorflow: Concepts, Tools, and Techniques to Build Intelligent Systems* (2017).
 
+The MDP is given (Chapter 16 fig 16.8) by: 
 |
 
 .. image:: ../_images/geron.png
@@ -21,6 +25,8 @@ In state s2, we add action a2 with a transition to s2 with a probability of 1.
 With a discount factor of 0.95, the expected optimal policy and value function are those mentioned in the original RST file.
 
 Tasks performed
+---------------
+
 #. Creation of the MDP
 
    * Creation of two ``MarmoteInterval`` objects to contain the state space and the action space
@@ -33,6 +39,8 @@ Tasks performed
 #. Use of EpsilonGreedy and SoftMax strategies for action selection
 
 Code
+----
+
 Here is the creation of the state and action spaces:
 
 .. code-block:: c++

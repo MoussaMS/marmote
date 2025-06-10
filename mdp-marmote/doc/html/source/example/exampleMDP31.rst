@@ -1,110 +1,137 @@
-Example MDP 31
-===============
+Example MDP 31 : Total Reward MDP with two-dimensional state space
+==================================================================
 
 Description
 -----------
 
-In this example we modelize the famous Stochastic Shortest Path: **four rooms**. A detailled presentation can be seen in the chapter *Hierarchical reinforcement learning* of Hengst in the book *Reinforcement learning state of the art*  with editors: M. Wiering and M. Otterlo.  
+In this example, we model the famous Stochastic Shortest Path: **four rooms** using C++. A detailed presentation can be seen in the chapter *Hierarchical reinforcement learning* by Hengst in the book *Reinforcement Learning State of the Art* edited by M. Wiering and M. van Otterlo.
 
-The MDP can be represented by 
+The MDP can be represented by
 
 .. image:: ../_images/FourRooms.png
     :scale: 90
     :align: center
     :alt: picture of the MDP
-    
-Mathematical description
+
+Mathematical Description
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-Here wa add a supplementary lines. Once we reach any element of line 10 we infinitely remain in this state.
+We add a supplementary line. Once we reach any element of line 10, we infinitely remain in this state.
 
 Hence:
 
-* The state space is a box of eleven lines and ten columns (*[0,10]x[0,9]*). 
-* The action space is of size four (0 means UP, 1 means DOWN, 2 means LEFT, 3 means RIGHT). 
-* Any move cost 1 except the move from state (9,2) to (10,2) that costs -1. Any move in states (10,.) cost 0.
-* In each state wa have a probability of 0.9 to follows the action and 0.1 to remain in the same space.
-    
-    
+* The state space is a box of eleven lines and ten columns (*[0,10]x[0,9]*).
+* The action space is of size four (0 means UP, 1 means DOWN, 2 means LEFT, 3 means RIGHT).
+* Any move costs 1 except the move from state (9,2) to (10,2) that costs -1. Any move in states (10,.) costs 0.
+* In each state, we have a probability of 0.9 to follow the action and 0.1 to remain in the same state.
+
 Specificity
 ~~~~~~~~~~~
 
-A **major advantage** of this example lies in the fact have a  **several dimensions state space** that we manage with **dedicated object of marmoteCore** here we use a **MarmoteBox**. 
+A **major advantage** of this example lies in the fact that we have a **multi-dimensional state space** that we manage with **dedicated objects of marmoteCore**, here we use a **MarmoteBox**.
 
-Tasks performed:
+Tasks Performed:
 ----------------
 
-Multidimensional sets
+Multidimensional Sets
 ~~~~~~~~~~~~~~~~~~~~~
 
-We use here a two dimensional set **MarmoteBox** which is an herited class of `MarmoteSet`.  It allows to manage multidimensional set and to get the index of any state.
+We use a two-dimensional set **MarmoteBox**, which is an inherited class of `MarmoteSet`. It allows managing multidimensional sets and getting the index of any state.
 
 Code
 ----
 
-1. We built a state space with a `MarmoteBox` object. This requires to build an array with the size of each dimension and then build the object with two parameters: the dimension and the array of sizes. 
+1. We build a state space with a `MarmoteBox` object. This requires building an array with the size of each dimension and then building the object with two parameters: the dimension and the array of sizes.
 
-.. code-block:: c++
+.. code-block:: cpp
 
-    /* create the state space as a marmoteBox */
-    /* definitions of the size of the two dimensions: dimension 1 is 11 and dimension 2 is 10 */
-    stateType dims[2]={11,10};
-    /* create the box*/
-    MarmoteBox *stateSpace = new MarmoteBox(2,dims);
+    #include <iostream>
+    #include "marmotecore.h"
+    #include "marmotemdps.h"
 
-    
-2. To handle `MarmoteBox` one should use a *buffer*. This is detailled below
+    int main() {
+        /* Create the state space as a MarmoteBox */
+        /* Definitions of the size of the two dimensions: dimension 1 is 11 and dimension 2 is 10 */
+        stateType dims[2] = {11, 10};
+        /* Create the box */
+        MarmoteBox *stateSpace = new MarmoteBox(2, dims);
 
-.. code-block:: c++
-    
-    /*Allocate buffers (to be used to manage the state) */
+        /* Create the action space as an interval from 0 to 3 */
+        MarmoteInterval *actionSpace = new MarmoteInterval(0, 3);
+
+2. To handle `MarmoteBox`, one should use a *buffer*. This is detailed below.
+
+.. code-block:: cpp
+
+    /* Allocate buffers (to be used to manage the state) */
     MarmoteState statebufferO = stateSpace->StateBuffer();
-    
-    /* defining the state to (9,2)  */
-    statebufferO[0]=9;
-    statebufferO[1]=2;
+
+    /* Defining the state to (9,2) */
+    statebufferO[0] = 9;
+    statebufferO[1] = 2;
     /* Getting the index of the state (9,2) */
-    indexO=stateSpace->Index(statebufferO);
-    /* defining the entry of the cost matrix with action UP to -2 */
-    CostMat->setEntry(indexO,0,-2.0);
-    /* obtaining the state associated to index 50 and putting in statebuffer */ 
-    stateSpace->DecodeState(50, statebufferO);
+    stateType indexO = stateSpace->Index(statebufferO);
+    /* Defining the entry of the cost matrix with action UP to -1 */
+    FullMatrix *CostMat = new FullMatrix(stateSpace->Cardinal(), actionSpace->Cardinal());
+    CostMat->setEntry(indexO, 0, -1.0);
 
-3. We write the solution with respect a given dimension. In the code below dimension 1 varies for each value a diemnsion 0. This gives a line by line writing. To do that we should cast the type of the policy returned by value iteration to have a `FeedbackSolutionMDP`. Then we write the policy with repsect to a given dimension with `WriteSolutionByDim`.
+3. We write the solution with respect to a given dimension. In the code below, dimension 1 varies for each value of dimension 0. This gives a line-by-line writing. To do that, we should cast the type of the policy returned by value iteration to have a `FeedbackSolutionMDP`. Then we write the policy with respect to a given dimension with `WriteSolutionByDim`.
 
+.. code-block:: cpp
 
-.. code-block:: c++
-    
-    /* to get FeedbackPolicy properties we should make a cast */
-    FeedbackSolutionMDP * policy;
-    if ( dynamic_cast <FeedbackSolutionMDP *> (optimum2)  != NULL ){
-        policy = dynamic_cast <FeedbackSolutionMDP *> (optimum2);
+    /* Create and fill the cost matrix */
+    for (stateType k = 0; k < stateSpace->Cardinal(); ++k) {
+        for (stateType a = 0; a < actionSpace->Cardinal(); ++a) {
+            CostMat->setEntry(k, a, 1);
+        }
     }
-    /* Now policy is of FeedbackSolutionMDP type */
-    cout<<"Print solution by dimension (line by line)"<< endl;
-    optimum2->WriteSolutionByDim(1,stateSpace);
-    
-4. We path the whole state space with the methods `stateSpace->FirstState()`
- 
-.. code-block:: c++
- 
+
+    /* Create the MDP */
+    TotalRewardMDP *mdpSSP = new TotalRewardMDP("min", stateSpace, actionSpace, CostMat);
+
+    /* Solve the MDP using value iteration */
+    double epsilon = 0.0001;
+    int maxIter = 250;
+    SolutionMDP *optimum2 = mdpSSP->ValueIteration(epsilon, maxIter);
+
+    /* To get FeedbackPolicy properties, we should make a cast */
+    FeedbackSolutionMDP *policy = dynamic_cast<FeedbackSolutionMDP*>(optimum2);
+    if (policy != nullptr) {
+        std::cout << "Print solution by dimension (line by line)" << std::endl;
+        policy->WriteSolutionByDim(1, stateSpace);
+    }
+
+4. We traverse the whole state space with the methods `stateSpace->FirstState()`.
+
+.. code-block:: cpp
+
     /* statebufferO is in initial state */
     stateSpace->FirstState(statebufferO);
-    /* path */
-    for(k=0; k<stateSpace->Cardinal();k++){
-        /* getting the index of the state */
-        indexO = stateSpace->Index(statebufferO);
-        /* the different values of the states are in the array statebufferO */
-        l=statebufferO[0]; /* getting value of the first dimension of the box */
-        c=statebufferO[1]; /* getting value of the second dimension of the box */
-        /* writing the row and the column */
-        cout<< "--line=" << l << " --column=" << c;
-        /* getting the values and the action at the index of the state */
-        cout<< " --Optimal action=" << policy->getActionIndex(indexO) << " --Optimal Value=" << policy->getValueIndex(indexO)  <<endl;
+    /* Traverse */
+    for (stateType k = 0; k < stateSpace->Cardinal(); ++k) {
+        /* Getting the index of the state */
+        stateType indexO = stateSpace->Index(statebufferO);
+        /* The different values of the states are in the array statebufferO */
+        stateType l = statebufferO[0]; /* Getting value of the first dimension of the box */
+        stateType c = statebufferO[1]; /* Getting value of the second dimension of the box */
+        /* Writing the row and the column */
+        std::cout << "--line=" << l << " --column=" << c;
+        /* Getting the values and the action at the index of the state */
+        std::cout << " --Optimal action=" << policy->getActionIndex(indexO)
+                  << " --Optimal Value=" << policy->getValueIndex(indexO) << std::endl;
         /* Move to next state */
         stateSpace->NextState(statebufferO);
     }
-    
+
+    /* Clean up */
+    delete stateSpace;
+    delete actionSpace;
+    delete CostMat;
+    delete mdpSSP;
+    delete optimum2;
+
+    return 0;
+    }
 
 Download
 --------
@@ -114,9 +141,7 @@ The source file is :download:`here <../media/exampleMDP31.cpp>`
 Output
 ------
 
-A (partial) output is here 
+A (partial) output is here
 
 .. literalinclude:: ../media/exampleMDP31.res
     :language: text
-
-

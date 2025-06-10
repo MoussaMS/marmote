@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Example MDP 21 &mdash; Marmote initial documentation</title>
+  <title>Example MDP 21 : Average MDP and Policy handling &mdash; Marmote initial documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
 
@@ -21,8 +21,8 @@
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Example MDP 22" href="exampleMDP22.html" />
-    <link rel="prev" title="Example MDP 20" href="exampleMDP20.html" /> 
+    <link rel="next" title="Example MDP 31 : Total Reward MDP with two-dimensional state space" href="exampleMDP31.html" />
+    <link rel="prev" title="MDP Example 11: Additional Methods" href="exampleMDP11.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -57,10 +57,9 @@
 <li class="toctree-l3"><a class="reference internal" href="example6.html">Example 6</a></li>
 <li class="toctree-l3"><a class="reference internal" href="example7.html">Example 7</a></li>
 <li class="toctree-l3"><a class="reference internal" href="example10.html">Example 10</a></li>
-<li class="toctree-l3"><a class="reference internal" href="exampleMDP10.html">MDP Example 10: discounted MDP</a></li>
-<li class="toctree-l3"><a class="reference internal" href="exampleMDP11.html">Example MDP 11</a></li>
-<li class="toctree-l3"><a class="reference internal" href="exampleMDP20.html">Example MDP 20</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">Example MDP 21</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="exampleMDP10.html">MDP Example 10: Discounted MDP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="exampleMDP11.html">MDP Example 11: Additional Methods</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Example MDP 21 : Average MDP and Policy handling</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#description">Description</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#tasks-performed">Tasks performed:</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#code">Code</a></li>
@@ -68,9 +67,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#download">Download</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="exampleMDP22.html">Example MDP 22</a></li>
-<li class="toctree-l3"><a class="reference internal" href="exampleMDP30.html">Example MDP 30</a></li>
-<li class="toctree-l3"><a class="reference internal" href="exampleMDP31.html">Example MDP 31</a></li>
+<li class="toctree-l3"><a class="reference internal" href="exampleMDP31.html">Example MDP 31 : Total Reward MDP with two-dimensional state space</a></li>
 <li class="toctree-l3"><a class="reference internal" href="exampleMDP40.html">Example MDP 40</a></li>
 </ul>
 </li>
@@ -98,7 +95,7 @@
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../cpp_api.html">C++ API</a></li>
           <li class="breadcrumb-item"><a href="../cpp_examples.html">C++ Tutorial and Examples</a></li>
-      <li class="breadcrumb-item active">Example MDP 21</li>
+      <li class="breadcrumb-item active">Example MDP 21 : Average MDP and Policy handling</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/example/exampleMDP21.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -108,42 +105,42 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="example-mdp-21">
-<h1>Example MDP 21<a class="headerlink" href="#example-mdp-21" title="Link to this heading"></a></h1>
+  <section id="example-mdp-21-average-mdp-and-policy-handling">
+<h1>Example MDP 21 : Average MDP and Policy handling<a class="headerlink" href="#example-mdp-21-average-mdp-and-policy-handling" title="Link to this heading"></a></h1>
 <section id="description">
 <h2>Description<a class="headerlink" href="#description" title="Link to this heading"></a></h2>
-<p>This is an Avreage cost MDP</p>
+<p>This is an Average cost MDP</p>
 <div class="line-block">
-<div class="line">This example assumed a single machine which has 4 states</div>
+<div class="line">This example assumes a single machine which has 4 states:</div>
 <div class="line">— 0 = new</div>
-<div class="line">— 1 = usable with minor damage</div>
-<div class="line">— 2 = usable with major damage</div>
-<div class="line">— 3 = Out of order</div>
+<div class="line">— 1 = usable with minor deterioration</div>
+<div class="line">— 2 = usable with major deterioration</div>
+<div class="line">— 3 = unusable</div>
 </div>
 <div class="line-block">
-<div class="line">This example has 3 actions</div>
-<div class="line">— 0 = Do nothing and the system remains in the same state.</div>
+<div class="line">This example has 3 actions:</div>
+<div class="line">— 0 = Do nothing: remain as is</div>
 <div class="line-block">
-<div class="line">Cost of action 0 in state 0 = 0.</div>
+<div class="line">Cost of action 0 in state 0 = 0</div>
 <div class="line">Cost of action 0 in state 1 = 1000</div>
 <div class="line">Cost of action 0 in state 2 = 3000</div>
 <div class="line">Cost of action 0 in state 3 = 3000</div>
 </div>
-<div class="line">— 1 = Fine tuning and the system jumps to state  Cost in any state = 4000</div>
+<div class="line">— 1 = Tune-up: return to status 1. Cost in any state = 4000</div>
 <div class="line">— 2 = Total repair: return to state 0. Cost in any state = 6000</div>
 </div>
-<p>This example comes from a MDP course of J.Y. Potvin.</p>
-<p>The optimal expected value is 1666.67 and the optimal policy is (0,0,1,2)</p>
+<p>This example demonstrates average MDP and policy handling using the marmote library.</p>
+<p>The optimal policy is found using three different algorithms and several policies are evaluated and compared.</p>
 <div class="line-block">
-<div class="line">Some others policies are also considered and evaluated :</div>
-<div class="line">— Ra = (1, 1, 1, 3) with average cost = 1923.</div>
-<div class="line">— Rc = (1, 1, 3, 3) with average cost = 1727.</div>
-<div class="line">— Rd = (1, 3, 3, 3) with average cost = 3000.</div>
+<div class="line">Some policies considered and evaluated:</div>
+<div class="line">— Ra = (0, 0, 0, 2) with average cost computed</div>
+<div class="line">— Rc = (0, 0, 2, 2) with average cost computed</div>
+<div class="line">— Rd = (0, 2, 2, 2) with average cost computed</div>
 </div>
 </section>
 <section id="tasks-performed">
 <h2>Tasks performed:<a class="headerlink" href="#tasks-performed" title="Link to this heading"></a></h2>
-<p>We create P0, P1, P2 <code class="docutils literal notranslate"><span class="pre">SparseMatrix</span></code> matrices that are the transition matrices associated with decision 0, 1, 2</p>
+<p>We create P0, P1, P2 <code class="docutils literal notranslate"><span class="pre">SparseMatrix</span></code> matrices that are the transition matrices associated with actions 0, 1, 2</p>
 <p>We create Reward the matrix of the cost.</p>
 <div class="line-block">
 <div class="line">In line with explanation above it is equal to:</div>
@@ -152,35 +149,122 @@
 <div class="line">[ 3000  4000 6000 ]</div>
 <div class="line">[ 3000  4000 6000 ]</div>
 </div>
-<p>For each of the solving method we measure the running time</p>
-<p>We consider policy Ra, Rc, Rd and we evaluate their costs by mean of function <code class="docutils literal notranslate"><span class="pre">PolicyCost()</span></code></p>
-<p>Clean up.</p>
+<p>For each of the solving methods we solve the MDP using Value Iteration, Policy Iteration Modified, and Relative Value Iteration</p>
+<p>We consider policies Ra, Rc, Rd and we evaluate their costs by means of function <code class="docutils literal notranslate"><span class="pre">PolicyCost()</span></code></p>
+<p>We perform structural analysis of the optimal solution using PropertiesValue and PropertiesPolicy classes.</p>
 </section>
 <section id="code">
 <h2>Code<a class="headerlink" href="#code" title="Link to this heading"></a></h2>
-<p>We build the AverageMDP. The criteria is a string equal to <cite>min</cite> defined line 52,</p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Building MDP&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-<span class="n">AverageMDP</span><span class="w"> </span><span class="o">*</span><span class="n">mdp1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">AverageMDP</span><span class="p">(</span><span class="n">critere</span><span class="p">,</span><span class="w"> </span><span class="n">stateSpace</span><span class="p">,</span><span class="w"> </span><span class="n">actionSpace</span><span class="p">,</span><span class="w"> </span><span class="n">trans</span><span class="p">,</span><span class="w"> </span><span class="n">Reward</span><span class="p">);</span>
+<p>We build the spaces and transition matrices. The state space has dimension 4 and action space has dimension 3:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">dim_SS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span><span class="w"> </span><span class="c1">// dimension of the state space</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">dim_AS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span><span class="w"> </span><span class="c1">// dimension of the action space</span>
+
+<span class="n">MarmoteInterval</span><span class="w"> </span><span class="o">*</span><span class="n">stateSpace</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MarmoteInterval</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">);</span>
+<span class="n">MarmoteInterval</span><span class="w"> </span><span class="o">*</span><span class="n">actionSpace</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MarmoteInterval</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>We create the transition matrices for each action:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="c1">// matrix for action 0</span>
+<span class="n">SparseMatrix</span><span class="w"> </span><span class="o">*</span><span class="n">P0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SparseMatrix</span><span class="p">(</span><span class="n">dim_SS</span><span class="p">);</span>
+<span class="n">P0</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mf">0.875</span><span class="p">);</span>
+<span class="n">P0</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mf">0.0625</span><span class="p">);</span>
+<span class="n">P0</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mf">0.0625</span><span class="p">);</span>
+<span class="n">P0</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mf">0.75</span><span class="p">);</span>
+<span class="n">P0</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mf">0.125</span><span class="p">);</span>
+<span class="n">P0</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mf">0.125</span><span class="p">);</span>
+<span class="n">P0</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mf">0.5</span><span class="p">);</span>
+<span class="n">P0</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mf">0.5</span><span class="p">);</span>
+<span class="n">P0</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mf">1.0</span><span class="p">);</span>
+
+<span class="c1">// matrix for action 1</span>
+<span class="n">SparseMatrix</span><span class="w"> </span><span class="o">*</span><span class="n">P1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SparseMatrix</span><span class="p">(</span><span class="n">dim_SS</span><span class="p">);</span>
+<span class="n">P1</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mf">0.875</span><span class="p">);</span>
+<span class="n">P1</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mf">0.0625</span><span class="p">);</span>
+<span class="n">P1</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mf">0.0625</span><span class="p">);</span>
+<span class="n">P1</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mf">0.75</span><span class="p">);</span>
+<span class="n">P1</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mf">0.125</span><span class="p">);</span>
+<span class="n">P1</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mf">0.125</span><span class="p">);</span>
+<span class="n">P1</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mf">1.0</span><span class="p">);</span>
+<span class="n">P1</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mf">1.0</span><span class="p">);</span>
+
+<span class="c1">// matrix for action 2</span>
+<span class="n">SparseMatrix</span><span class="w"> </span><span class="o">*</span><span class="n">P2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SparseMatrix</span><span class="p">(</span><span class="n">dim_SS</span><span class="p">);</span>
+<span class="n">P2</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mf">0.875</span><span class="p">);</span>
+<span class="n">P2</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mf">0.0625</span><span class="p">);</span>
+<span class="n">P2</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mf">0.0625</span><span class="p">);</span>
+<span class="n">P2</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mf">1.0</span><span class="p">);</span>
+<span class="n">P2</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mf">1.0</span><span class="p">);</span>
+<span class="n">P2</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mf">1.0</span><span class="p">);</span>
+
+<span class="n">SparseMatrix</span><span class="w"> </span><span class="o">**</span><span class="n">trans</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SparseMatrix</span><span class="o">*</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>
+<span class="n">trans</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">P0</span><span class="p">;</span>
+<span class="n">trans</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">P1</span><span class="p">;</span>
+<span class="n">trans</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">P2</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>We create the reward matrix:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">FullMatrix</span><span class="w"> </span><span class="o">*</span><span class="n">Reward</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">FullMatrix</span><span class="p">(</span><span class="n">dim_SS</span><span class="p">,</span><span class="w"> </span><span class="n">dim_AS</span><span class="p">);</span>
+<span class="n">Reward</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+<span class="n">Reward</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">4000</span><span class="p">);</span>
+<span class="n">Reward</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">6000</span><span class="p">);</span>
+<span class="n">Reward</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1000</span><span class="p">);</span>
+<span class="n">Reward</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">4000</span><span class="p">);</span>
+<span class="n">Reward</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">6000</span><span class="p">);</span>
+<span class="n">Reward</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">3000</span><span class="p">);</span>
+<span class="n">Reward</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">4000</span><span class="p">);</span>
+<span class="n">Reward</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">6000</span><span class="p">);</span>
+<span class="n">Reward</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">3000</span><span class="p">);</span>
+<span class="n">Reward</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">4000</span><span class="p">);</span>
+<span class="n">Reward</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">6000</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>We build the AverageMDP. The criterion is a string equal to <cite>“min”</cite>:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">string</span><span class="w"> </span><span class="n">criterion</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;min&quot;</span><span class="p">;</span>
+<span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Building MDP&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="n">AverageMDP</span><span class="w"> </span><span class="o">*</span><span class="n">mdp1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">AverageMDP</span><span class="p">(</span><span class="n">criterion</span><span class="p">,</span><span class="w"> </span><span class="n">stateSpace</span><span class="p">,</span><span class="w"> </span><span class="n">actionSpace</span><span class="p">,</span><span class="w"> </span><span class="n">trans</span><span class="p">,</span><span class="w"> </span><span class="n">Reward</span><span class="p">);</span>
 <span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Building MDP finished&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
 </pre></div>
 </div>
-<p>Here is the code to launch <code class="docutils literal notranslate"><span class="pre">ValueIteration(epsilon,</span> <span class="pre">maxIter)</span></code> : <em>epsilon</em> is the precision, <em>maxIter</em> the maximum number of allowed iterations.
-We then measure the running time.</p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">start_t</span><span class="w"> </span><span class="o">=</span><span class="n">clock</span><span class="p">();</span>
-<span class="n">SolutionMDP</span><span class="w"> </span><span class="o">*</span><span class="n">optimum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mdp1</span><span class="o">-&gt;</span><span class="n">ValueIteration</span><span class="p">(</span><span class="n">epsilon</span><span class="p">,</span><span class="w"> </span><span class="n">maxIter</span><span class="p">);</span>
-<span class="n">end_t</span><span class="o">=</span><span class="w"> </span><span class="n">clock</span><span class="p">();</span>
+<p>Here is the code to launch <code class="docutils literal notranslate"><span class="pre">ValueIteration(epsilon,</span> <span class="pre">maxIter)</span></code>: <em>epsilon</em> is the precision, <em>maxIter</em> the maximum number of allowed iterations:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kt">double</span><span class="w"> </span><span class="n">epsilon</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.00001</span><span class="p">;</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">maxIter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">500</span><span class="p">;</span>
+
+<span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Compute with Value Iteration&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="n">start_t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">clock</span><span class="p">();</span>
+<span class="n">FeedbackSolutionMDP</span><span class="w"> </span><span class="o">*</span><span class="n">optimum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mdp1</span><span class="o">-&gt;</span><span class="n">ValueIteration</span><span class="p">(</span><span class="n">epsilon</span><span class="p">,</span><span class="w"> </span><span class="n">maxIter</span><span class="p">);</span>
+<span class="n">end_t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">clock</span><span class="p">();</span>
 <span class="n">total_t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">double</span><span class="p">)(</span><span class="n">end_t</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">start_t</span><span class="p">)</span><span class="o">/</span><span class="n">CLOCKS_PER_SEC</span><span class="p">;</span>
-<span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="s">&quot;# Done : elapsing time &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">total_t</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; sec&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;# Done : elapsing time &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">total_t</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; sec&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
 <span class="n">optimum</span><span class="o">-&gt;</span><span class="n">WriteSolution</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>Here is the code to launch <code class="docutils literal notranslate"><span class="pre">PolicyIterationModified(epsilon,</span> <span class="pre">maxIter,</span> <span class="pre">epsilon2,</span> <span class="pre">maxIter2)</span></code>:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Computation with Policy Iteration Modified&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="n">start_t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">clock</span><span class="p">();</span>
+<span class="n">FeedbackSolutionMDP</span><span class="w"> </span><span class="o">*</span><span class="n">optimum2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mdp1</span><span class="o">-&gt;</span><span class="n">PolicyIterationModified</span><span class="p">(</span><span class="n">epsilon</span><span class="p">,</span><span class="w"> </span><span class="n">maxIter</span><span class="p">,</span><span class="w"> </span><span class="mf">0.001</span><span class="p">,</span><span class="w"> </span><span class="mi">1000</span><span class="p">);</span>
+<span class="n">end_t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">clock</span><span class="p">();</span>
+<span class="n">total_t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">double</span><span class="p">)(</span><span class="n">end_t</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">start_t</span><span class="p">)</span><span class="o">/</span><span class="n">CLOCKS_PER_SEC</span><span class="p">;</span>
+<span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;# Done : elapsing time &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">total_t</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; sec&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="n">optimum2</span><span class="o">-&gt;</span><span class="n">WriteSolution</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>Here is the code to launch <code class="docutils literal notranslate"><span class="pre">RelativeValueIteration(epsilon,</span> <span class="pre">maxIter)</span></code>:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Computation with Relative Value Iteration&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="n">start_t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">clock</span><span class="p">();</span>
+<span class="n">FeedbackSolutionMDP</span><span class="w"> </span><span class="o">*</span><span class="n">optimum3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mdp1</span><span class="o">-&gt;</span><span class="n">RelativeValueIteration</span><span class="p">(</span><span class="n">epsilon</span><span class="p">,</span><span class="w"> </span><span class="n">maxIter</span><span class="p">);</span>
+<span class="n">end_t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">clock</span><span class="p">();</span>
+<span class="n">total_t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">double</span><span class="p">)(</span><span class="n">end_t</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">start_t</span><span class="p">)</span><span class="o">/</span><span class="n">CLOCKS_PER_SEC</span><span class="p">;</span>
+<span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;# Done : elapsing time &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">total_t</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; sec&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="n">optimum3</span><span class="o">-&gt;</span><span class="n">WriteSolution</span><span class="p">();</span>
 </pre></div>
 </div>
 <div class="line-block">
 <div class="line">Here is the code to define a policy.</div>
 <div class="line">A stationary policy is an object <code class="docutils literal notranslate"><span class="pre">FeedbackSolutionMDP</span></code> created with the constructor <code class="docutils literal notranslate"><span class="pre">FeedbackSolutionMDP(dimension)</span></code>.</div>
-<div class="line">We fix the value of the action with <code class="docutils literal notranslate"><span class="pre">setActionIndex(index,value)</span></code>.</div>
+<div class="line">We fix the value of the action with <code class="docutils literal notranslate"><span class="pre">setActionIndex(index,</span> <span class="pre">value)</span></code>.</div>
 <div class="line">Here the policy is <em>Ra=[0,0,0,2]</em></div>
 </div>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="s">&quot;Politicy Ra&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Define Policy Ra&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
 <span class="n">FeedbackSolutionMDP</span><span class="o">*</span><span class="w"> </span><span class="n">politique</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">FeedbackSolutionMDP</span><span class="p">(</span><span class="n">stateSpace</span><span class="o">-&gt;</span><span class="n">Cardinal</span><span class="p">());</span>
 <span class="n">politique</span><span class="o">-&gt;</span><span class="n">setActionIndex</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
 <span class="n">politique</span><span class="o">-&gt;</span><span class="n">setActionIndex</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
@@ -189,21 +273,85 @@ We then measure the running time.</p>
 </pre></div>
 </div>
 <div class="line-block">
-<div class="line">We now evaluate (or compute)  the cost of a policy.</div>
-<div class="line">This is done with <code class="docutils literal notranslate"><span class="pre">PolicyCost(politique,epsilon,</span> <span class="pre">maxIter)</span></code></div>
-<div class="line">The method <code class="docutils literal notranslate"><span class="pre">setValue(solpol)</span></code> fix the averagevalue to <code class="docutils literal notranslate"><span class="pre">solpol</span></code></div>
+<div class="line">We now evaluate (or compute) the cost of a policy.</div>
+<div class="line">This is done with <code class="docutils literal notranslate"><span class="pre">PolicyCost(politique,</span> <span class="pre">epsilon,</span> <span class="pre">maxIter)</span></code></div>
+<div class="line">The method <code class="docutils literal notranslate"><span class="pre">resetValue()</span></code> resets the values to zero</div>
 </div>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cm">/* reset the value to zero*/</span>
 <span class="n">politique</span><span class="o">-&gt;</span><span class="n">resetValue</span><span class="p">();</span>
 <span class="cm">/* reset the average cost to 0.0*/</span>
 <span class="n">politique</span><span class="o">-&gt;</span><span class="n">setAvgCost</span><span class="p">(</span><span class="mf">0.0</span><span class="p">);</span>
 
-<span class="n">cout</span><span class="w">  </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="s">&quot;Checking solutions&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-<span class="kt">double</span><span class="w"> </span><span class="o">*</span><span class="n">solpol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mdp1</span><span class="o">-&gt;</span><span class="n">PolicyCost</span><span class="p">(</span><span class="n">politique</span><span class="p">,</span><span class="n">epsilon</span><span class="p">,</span><span class="w"> </span><span class="n">maxIter</span><span class="p">);</span>
+<span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Print solution Ra&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="kt">double</span><span class="w"> </span><span class="o">*</span><span class="n">solpol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mdp1</span><span class="o">-&gt;</span><span class="n">PolicyCost</span><span class="p">(</span><span class="n">politique</span><span class="p">,</span><span class="w"> </span><span class="n">epsilon</span><span class="p">,</span><span class="w"> </span><span class="n">maxIter</span><span class="p">);</span>
 <span class="n">politique</span><span class="o">-&gt;</span><span class="n">setValue</span><span class="p">(</span><span class="n">solpol</span><span class="p">);</span>
 <span class="n">politique</span><span class="o">-&gt;</span><span class="n">WriteSolution</span><span class="p">();</span>
 </pre></div>
 </div>
+<p>Here is the code to define and evaluate other policies:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Modify the previous Policy and defining a new policy Rc&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="n">politique</span><span class="o">-&gt;</span><span class="n">setActionIndex</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+<span class="n">politique</span><span class="o">-&gt;</span><span class="n">setActionIndex</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+<span class="n">politique</span><span class="o">-&gt;</span><span class="n">setActionIndex</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span>
+<span class="n">politique</span><span class="o">-&gt;</span><span class="n">setActionIndex</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span>
+
+<span class="n">politique</span><span class="o">-&gt;</span><span class="n">resetValue</span><span class="p">();</span>
+<span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Print solution of Rc&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="n">solpol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mdp1</span><span class="o">-&gt;</span><span class="n">PolicyCost</span><span class="p">(</span><span class="n">politique</span><span class="p">,</span><span class="w"> </span><span class="n">epsilon</span><span class="p">,</span><span class="w"> </span><span class="n">maxIter</span><span class="p">);</span>
+<span class="n">politique</span><span class="o">-&gt;</span><span class="n">setValue</span><span class="p">(</span><span class="n">solpol</span><span class="p">);</span>
+<span class="n">politique</span><span class="o">-&gt;</span><span class="n">WriteSolution</span><span class="p">();</span>
+
+<span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Define Policy Rd&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="n">politique</span><span class="o">-&gt;</span><span class="n">setActionIndex</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+<span class="n">politique</span><span class="o">-&gt;</span><span class="n">setActionIndex</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span>
+<span class="n">politique</span><span class="o">-&gt;</span><span class="n">setActionIndex</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span>
+<span class="n">politique</span><span class="o">-&gt;</span><span class="n">setActionIndex</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span>
+
+<span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Print solution of Rd&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="n">solpol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mdp1</span><span class="o">-&gt;</span><span class="n">PolicyCost</span><span class="p">(</span><span class="n">politique</span><span class="p">,</span><span class="w"> </span><span class="n">epsilon</span><span class="p">,</span><span class="w"> </span><span class="n">maxIter</span><span class="p">);</span>
+<span class="n">politique</span><span class="o">-&gt;</span><span class="n">setValue</span><span class="p">(</span><span class="n">solpol</span><span class="p">);</span>
+<span class="n">politique</span><span class="o">-&gt;</span><span class="n">WriteSolution</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>Here is the code for structural analysis of the value function:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">PropertiesValue</span><span class="w"> </span><span class="o">*</span><span class="n">checkValue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">PropertiesValue</span><span class="p">(</span><span class="n">stateSpace</span><span class="p">);</span>
+<span class="n">checkValue</span><span class="o">-&gt;</span><span class="n">avoidDetail</span><span class="p">();</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">monotone</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">checkValue</span><span class="o">-&gt;</span><span class="n">Monotonicity</span><span class="p">(</span><span class="n">optimum</span><span class="p">);</span>
+<span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Printing monotonicity property of value function (1 if increasing -1 if decreasing 0 otherwise) : &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">monotone</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+<span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Verif convexity with details&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="n">checkValue</span><span class="o">-&gt;</span><span class="n">getDetail</span><span class="p">();</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">convex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">checkValue</span><span class="o">-&gt;</span><span class="n">Convexity</span><span class="p">(</span><span class="n">optimum</span><span class="p">);</span>
+<span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Printing convexity property of value function (1 if convex -1 concave 0 otherwise) : &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">convex</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Here is the code for structural analysis of the policy:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Checking Structural Properties of policy&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="n">PropertiesPolicy</span><span class="w"> </span><span class="o">*</span><span class="n">checkPolicy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">PropertiesPolicy</span><span class="p">(</span><span class="n">stateSpace</span><span class="p">);</span>
+
+<span class="n">monotone</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">checkPolicy</span><span class="o">-&gt;</span><span class="n">Monotonicity</span><span class="p">(</span><span class="n">optimum</span><span class="p">);</span>
+<span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;PropertiesPolicy::MonotonicityOptimalPolicy=&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">monotone</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; (1 if increasing -1 if decreasing 0 otherwise) : &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</pre></div>
+</div>
+<section id="clean-up">
+<h3>Clean up:<a class="headerlink" href="#clean-up" title="Link to this heading"></a></h3>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">delete</span><span class="w"> </span><span class="n">mdp1</span><span class="p">;</span>
+<span class="k">delete</span><span class="w"> </span><span class="n">stateSpace</span><span class="p">;</span>
+<span class="k">delete</span><span class="w"> </span><span class="n">actionSpace</span><span class="p">;</span>
+<span class="k">delete</span><span class="w"> </span><span class="n">P0</span><span class="p">;</span>
+<span class="k">delete</span><span class="w"> </span><span class="n">P1</span><span class="p">;</span>
+<span class="k">delete</span><span class="w"> </span><span class="n">P2</span><span class="p">;</span>
+<span class="k">delete</span><span class="p">[]</span><span class="w"> </span><span class="n">trans</span><span class="p">;</span>
+<span class="k">delete</span><span class="w"> </span><span class="n">Reward</span><span class="p">;</span>
+<span class="k">delete</span><span class="w"> </span><span class="n">optimum</span><span class="p">;</span>
+<span class="k">delete</span><span class="w"> </span><span class="n">optimum2</span><span class="p">;</span>
+<span class="k">delete</span><span class="w"> </span><span class="n">optimum3</span><span class="p">;</span>
+<span class="k">delete</span><span class="w"> </span><span class="n">politique</span><span class="p">;</span>
+<span class="k">delete</span><span class="w"> </span><span class="n">checkValue</span><span class="p">;</span>
+<span class="k">delete</span><span class="w"> </span><span class="n">checkPolicy</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
 </section>
 <section id="output">
 <h2>Output<a class="headerlink" href="#output" title="Link to this heading"></a></h2>
@@ -421,8 +569,8 @@ Deleting 2
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="exampleMDP20.html" class="btn btn-neutral float-left" title="Example MDP 20" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="exampleMDP22.html" class="btn btn-neutral float-right" title="Example MDP 22" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="exampleMDP11.html" class="btn btn-neutral float-left" title="MDP Example 11: Additional Methods" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="exampleMDP31.html" class="btn btn-neutral float-right" title="Example MDP 31 : Total Reward MDP with two-dimensional state space" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

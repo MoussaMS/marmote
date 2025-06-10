@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Example MDP 31 &mdash; Marmote initial documentation</title>
+  <title>Example MDP 31 : Total Reward MDP with two-dimensional state space &mdash; Marmote initial documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
 
@@ -22,7 +22,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Example MDP 40" href="exampleMDP40.html" />
-    <link rel="prev" title="Example MDP 30" href="exampleMDP30.html" /> 
+    <link rel="prev" title="Example MDP 21 : Average MDP and Policy handling" href="exampleMDP21.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -57,15 +57,12 @@
 <li class="toctree-l3"><a class="reference internal" href="example6.html">Example 6</a></li>
 <li class="toctree-l3"><a class="reference internal" href="example7.html">Example 7</a></li>
 <li class="toctree-l3"><a class="reference internal" href="example10.html">Example 10</a></li>
-<li class="toctree-l3"><a class="reference internal" href="exampleMDP10.html">MDP Example 10: discounted MDP</a></li>
-<li class="toctree-l3"><a class="reference internal" href="exampleMDP11.html">Example MDP 11</a></li>
-<li class="toctree-l3"><a class="reference internal" href="exampleMDP20.html">Example MDP 20</a></li>
-<li class="toctree-l3"><a class="reference internal" href="exampleMDP21.html">Example MDP 21</a></li>
-<li class="toctree-l3"><a class="reference internal" href="exampleMDP22.html">Example MDP 22</a></li>
-<li class="toctree-l3"><a class="reference internal" href="exampleMDP30.html">Example MDP 30</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">Example MDP 31</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="exampleMDP10.html">MDP Example 10: Discounted MDP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="exampleMDP11.html">MDP Example 11: Additional Methods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="exampleMDP21.html">Example MDP 21 : Average MDP and Policy handling</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Example MDP 31 : Total Reward MDP with two-dimensional state space</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#description">Description</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#tasks-performed">Tasks performed:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#tasks-performed">Tasks Performed:</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#code">Code</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#download">Download</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#output">Output</a></li>
@@ -98,7 +95,7 @@
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../cpp_api.html">C++ API</a></li>
           <li class="breadcrumb-item"><a href="../cpp_examples.html">C++ Tutorial and Examples</a></li>
-      <li class="breadcrumb-item active">Example MDP 31</li>
+      <li class="breadcrumb-item active">Example MDP 31 : Total Reward MDP with two-dimensional state space</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/example/exampleMDP31.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -108,103 +105,128 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="example-mdp-31">
-<h1>Example MDP 31<a class="headerlink" href="#example-mdp-31" title="Link to this heading"></a></h1>
+  <section id="example-mdp-31-total-reward-mdp-with-two-dimensional-state-space">
+<h1>Example MDP 31 : Total Reward MDP with two-dimensional state space<a class="headerlink" href="#example-mdp-31-total-reward-mdp-with-two-dimensional-state-space" title="Link to this heading"></a></h1>
 <section id="description">
 <h2>Description<a class="headerlink" href="#description" title="Link to this heading"></a></h2>
-<p>In this example we modelize the famous Stochastic Shortest Path: <strong>four rooms</strong>. A detailled presentation can be seen in the chapter <em>Hierarchical reinforcement learning</em> of Hengst in the book <em>Reinforcement learning state of the art</em>  with editors: M. Wiering and M. Otterlo.</p>
+<p>In this example, we model the famous Stochastic Shortest Path: <strong>four rooms</strong> using C++. A detailed presentation can be seen in the chapter <em>Hierarchical reinforcement learning</em> by Hengst in the book <em>Reinforcement Learning State of the Art</em> edited by M. Wiering and M. van Otterlo.</p>
 <p>The MDP can be represented by</p>
-<a class="reference internal image-reference" href="_images/FourRooms.png"><img alt="picture of the MDP" class="align-center" src="_images/FourRooms.png" />
-<aside class="system-message">
-<p class="system-message-title">System Message: WARNING/2 (<span class="docutils literal">/home/moussa/licence3/doc/html/source/example/exampleMDP31.rst</span>, line 11)</p>
-<p>Cannot scale image!
-  Could not get size from &quot;_images/FourRooms.png&quot;:
-  [Errno 2] No such file or directory: '_images/FourRooms.png'</p>
-</aside>
+<a class="reference internal image-reference" href="../_images/FourRooms.png"><img alt="picture of the MDP" class="align-center" src="../_images/FourRooms.png" style="width: 350.1px; height: 300.6px;" />
 </a>
 <section id="mathematical-description">
-<h3>Mathematical description<a class="headerlink" href="#mathematical-description" title="Link to this heading"></a></h3>
-<p>Here wa add a supplementary lines. Once we reach any element of line 10 we infinitely remain in this state.</p>
+<h3>Mathematical Description<a class="headerlink" href="#mathematical-description" title="Link to this heading"></a></h3>
+<p>We add a supplementary line. Once we reach any element of line 10, we infinitely remain in this state.</p>
 <p>Hence:</p>
 <ul class="simple">
 <li><p>The state space is a box of eleven lines and ten columns (<em>[0,10]x[0,9]</em>).</p></li>
 <li><p>The action space is of size four (0 means UP, 1 means DOWN, 2 means LEFT, 3 means RIGHT).</p></li>
-<li><p>Any move cost 1 except the move from state (9,2) to (10,2) that costs -1. Any move in states (10,.) cost 0.</p></li>
-<li><p>In each state wa have a probability of 0.9 to follows the action and 0.1 to remain in the same space.</p></li>
+<li><p>Any move costs 1 except the move from state (9,2) to (10,2) that costs -1. Any move in states (10,.) costs 0.</p></li>
+<li><p>In each state, we have a probability of 0.9 to follow the action and 0.1 to remain in the same state.</p></li>
 </ul>
 </section>
 <section id="specificity">
 <h3>Specificity<a class="headerlink" href="#specificity" title="Link to this heading"></a></h3>
-<p>A <strong>major advantage</strong> of this example lies in the fact have a  <strong>several dimensions state space</strong> that we manage with <strong>dedicated object of marmoteCore</strong> here we use a <strong>MarmoteBox</strong>.</p>
+<p>A <strong>major advantage</strong> of this example lies in the fact that we have a <strong>multi-dimensional state space</strong> that we manage with <strong>dedicated objects of marmoteCore</strong>, here we use a <strong>MarmoteBox</strong>.</p>
 </section>
 </section>
 <section id="tasks-performed">
-<h2>Tasks performed:<a class="headerlink" href="#tasks-performed" title="Link to this heading"></a></h2>
+<h2>Tasks Performed:<a class="headerlink" href="#tasks-performed" title="Link to this heading"></a></h2>
 <section id="multidimensional-sets">
-<h3>Multidimensional sets<a class="headerlink" href="#multidimensional-sets" title="Link to this heading"></a></h3>
-<p>We use here a two dimensional set <strong>MarmoteBox</strong> which is an herited class of <cite>MarmoteSet</cite>.  It allows to manage multidimensional set and to get the index of any state.</p>
+<h3>Multidimensional Sets<a class="headerlink" href="#multidimensional-sets" title="Link to this heading"></a></h3>
+<p>We use a two-dimensional set <strong>MarmoteBox</strong>, which is an inherited class of <cite>MarmoteSet</cite>. It allows managing multidimensional sets and getting the index of any state.</p>
 </section>
 </section>
 <section id="code">
 <h2>Code<a class="headerlink" href="#code" title="Link to this heading"></a></h2>
 <ol class="arabic simple">
-<li><p>We built a state space with a <cite>MarmoteBox</cite> object. This requires to build an array with the size of each dimension and then build the object with two parameters: the dimension and the array of sizes.</p></li>
+<li><p>We build a state space with a <cite>MarmoteBox</cite> object. This requires building an array with the size of each dimension and then building the object with two parameters: the dimension and the array of sizes.</p></li>
 </ol>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cm">/* create the state space as a marmoteBox */</span>
-<span class="cm">/* definitions of the size of the two dimensions: dimension 1 is 11 and dimension 2 is 10 */</span>
-<span class="n">stateType</span><span class="w"> </span><span class="n">dims</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">=</span><span class="p">{</span><span class="mi">11</span><span class="p">,</span><span class="mi">10</span><span class="p">};</span>
-<span class="cm">/* create the box*/</span>
-<span class="n">MarmoteBox</span><span class="w"> </span><span class="o">*</span><span class="n">stateSpace</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MarmoteBox</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="n">dims</span><span class="p">);</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;marmotecore.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;marmotemdps.h&quot;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="cm">/* Create the state space as a MarmoteBox */</span>
+<span class="w">    </span><span class="cm">/* Definitions of the size of the two dimensions: dimension 1 is 11 and dimension 2 is 10 */</span>
+<span class="w">    </span><span class="n">stateType</span><span class="w"> </span><span class="n">dims</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mi">11</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">};</span>
+<span class="w">    </span><span class="cm">/* Create the box */</span>
+<span class="w">    </span><span class="n">MarmoteBox</span><span class="w"> </span><span class="o">*</span><span class="n">stateSpace</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MarmoteBox</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">dims</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/* Create the action space as an interval from 0 to 3 */</span>
+<span class="w">    </span><span class="n">MarmoteInterval</span><span class="w"> </span><span class="o">*</span><span class="n">actionSpace</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MarmoteInterval</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">);</span>
 </pre></div>
 </div>
 <ol class="arabic simple" start="2">
-<li><p>To handle <cite>MarmoteBox</cite> one should use a <em>buffer</em>. This is detailled below</p></li>
+<li><p>To handle <cite>MarmoteBox</cite>, one should use a <em>buffer</em>. This is detailed below.</p></li>
 </ol>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cm">/*Allocate buffers (to be used to manage the state) */</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cm">/* Allocate buffers (to be used to manage the state) */</span>
 <span class="n">MarmoteState</span><span class="w"> </span><span class="n">statebufferO</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">stateSpace</span><span class="o">-&gt;</span><span class="n">StateBuffer</span><span class="p">();</span>
 
-<span class="cm">/* defining the state to (9,2)  */</span>
-<span class="n">statebufferO</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span><span class="mi">9</span><span class="p">;</span>
-<span class="n">statebufferO</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="mi">2</span><span class="p">;</span>
+<span class="cm">/* Defining the state to (9,2) */</span>
+<span class="n">statebufferO</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">9</span><span class="p">;</span>
+<span class="n">statebufferO</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
 <span class="cm">/* Getting the index of the state (9,2) */</span>
-<span class="n">indexO</span><span class="o">=</span><span class="n">stateSpace</span><span class="o">-&gt;</span><span class="n">Index</span><span class="p">(</span><span class="n">statebufferO</span><span class="p">);</span>
-<span class="cm">/* defining the entry of the cost matrix with action UP to -2 */</span>
-<span class="n">CostMat</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="n">indexO</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mf">-2.0</span><span class="p">);</span>
-<span class="cm">/* obtaining the state associated to index 50 and putting in statebuffer */</span>
-<span class="n">stateSpace</span><span class="o">-&gt;</span><span class="n">DecodeState</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span><span class="w"> </span><span class="n">statebufferO</span><span class="p">);</span>
+<span class="n">stateType</span><span class="w"> </span><span class="n">indexO</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">stateSpace</span><span class="o">-&gt;</span><span class="n">Index</span><span class="p">(</span><span class="n">statebufferO</span><span class="p">);</span>
+<span class="cm">/* Defining the entry of the cost matrix with action UP to -1 */</span>
+<span class="n">FullMatrix</span><span class="w"> </span><span class="o">*</span><span class="n">CostMat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">FullMatrix</span><span class="p">(</span><span class="n">stateSpace</span><span class="o">-&gt;</span><span class="n">Cardinal</span><span class="p">(),</span><span class="w"> </span><span class="n">actionSpace</span><span class="o">-&gt;</span><span class="n">Cardinal</span><span class="p">());</span>
+<span class="n">CostMat</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="n">indexO</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mf">-1.0</span><span class="p">);</span>
 </pre></div>
 </div>
 <ol class="arabic simple" start="3">
-<li><p>We write the solution with respect a given dimension. In the code below dimension 1 varies for each value a diemnsion 0. This gives a line by line writing. To do that we should cast the type of the policy returned by value iteration to have a <cite>FeedbackSolutionMDP</cite>. Then we write the policy with repsect to a given dimension with <cite>WriteSolutionByDim</cite>.</p></li>
+<li><p>We write the solution with respect to a given dimension. In the code below, dimension 1 varies for each value of dimension 0. This gives a line-by-line writing. To do that, we should cast the type of the policy returned by value iteration to have a <cite>FeedbackSolutionMDP</cite>. Then we write the policy with respect to a given dimension with <cite>WriteSolutionByDim</cite>.</p></li>
 </ol>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cm">/* to get FeedbackPolicy properties we should make a cast */</span>
-<span class="n">FeedbackSolutionMDP</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">policy</span><span class="p">;</span>
-<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="k">dynamic_cast</span><span class="w"> </span><span class="o">&lt;</span><span class="n">FeedbackSolutionMDP</span><span class="w"> </span><span class="o">*&gt;</span><span class="w"> </span><span class="p">(</span><span class="n">optimum2</span><span class="p">)</span><span class="w">  </span><span class="o">!=</span><span class="w"> </span><span class="nb">NULL</span><span class="w"> </span><span class="p">){</span>
-<span class="w">    </span><span class="n">policy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">dynamic_cast</span><span class="w"> </span><span class="o">&lt;</span><span class="n">FeedbackSolutionMDP</span><span class="w"> </span><span class="o">*&gt;</span><span class="w"> </span><span class="p">(</span><span class="n">optimum2</span><span class="p">);</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cm">/* Create and fill the cost matrix */</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">stateType</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">stateSpace</span><span class="o">-&gt;</span><span class="n">Cardinal</span><span class="p">();</span><span class="w"> </span><span class="o">++</span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">stateType</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">actionSpace</span><span class="o">-&gt;</span><span class="n">Cardinal</span><span class="p">();</span><span class="w"> </span><span class="o">++</span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">CostMat</span><span class="o">-&gt;</span><span class="n">setEntry</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
-<span class="cm">/* Now policy is of FeedbackSolutionMDP type */</span>
-<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&quot;Print solution by dimension (line by line)&quot;</span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
-<span class="n">optimum2</span><span class="o">-&gt;</span><span class="n">WriteSolutionByDim</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">stateSpace</span><span class="p">);</span>
+
+<span class="cm">/* Create the MDP */</span>
+<span class="n">TotalRewardMDP</span><span class="w"> </span><span class="o">*</span><span class="n">mdpSSP</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">TotalRewardMDP</span><span class="p">(</span><span class="s">&quot;min&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">stateSpace</span><span class="p">,</span><span class="w"> </span><span class="n">actionSpace</span><span class="p">,</span><span class="w"> </span><span class="n">CostMat</span><span class="p">);</span>
+
+<span class="cm">/* Solve the MDP using value iteration */</span>
+<span class="kt">double</span><span class="w"> </span><span class="n">epsilon</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0001</span><span class="p">;</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">maxIter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">250</span><span class="p">;</span>
+<span class="n">SolutionMDP</span><span class="w"> </span><span class="o">*</span><span class="n">optimum2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mdpSSP</span><span class="o">-&gt;</span><span class="n">ValueIteration</span><span class="p">(</span><span class="n">epsilon</span><span class="p">,</span><span class="w"> </span><span class="n">maxIter</span><span class="p">);</span>
+
+<span class="cm">/* To get FeedbackPolicy properties, we should make a cast */</span>
+<span class="n">FeedbackSolutionMDP</span><span class="w"> </span><span class="o">*</span><span class="n">policy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">dynamic_cast</span><span class="o">&lt;</span><span class="n">FeedbackSolutionMDP</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">optimum2</span><span class="p">);</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">policy</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="k">nullptr</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Print solution by dimension (line by line)&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="n">policy</span><span class="o">-&gt;</span><span class="n">WriteSolutionByDim</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">stateSpace</span><span class="p">);</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 <ol class="arabic simple" start="4">
-<li><p>We path the whole state space with the methods <cite>stateSpace-&gt;FirstState()</cite></p></li>
+<li><p>We traverse the whole state space with the methods <cite>stateSpace-&gt;FirstState()</cite>.</p></li>
 </ol>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cm">/* statebufferO is in initial state */</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cm">/* statebufferO is in initial state */</span>
 <span class="n">stateSpace</span><span class="o">-&gt;</span><span class="n">FirstState</span><span class="p">(</span><span class="n">statebufferO</span><span class="p">);</span>
-<span class="cm">/* path */</span>
-<span class="k">for</span><span class="p">(</span><span class="n">k</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="o">&lt;</span><span class="n">stateSpace</span><span class="o">-&gt;</span><span class="n">Cardinal</span><span class="p">();</span><span class="n">k</span><span class="o">++</span><span class="p">){</span>
-<span class="w">    </span><span class="cm">/* getting the index of the state */</span>
-<span class="w">    </span><span class="n">indexO</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">stateSpace</span><span class="o">-&gt;</span><span class="n">Index</span><span class="p">(</span><span class="n">statebufferO</span><span class="p">);</span>
-<span class="w">    </span><span class="cm">/* the different values of the states are in the array statebufferO */</span>
-<span class="w">    </span><span class="n">l</span><span class="o">=</span><span class="n">statebufferO</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span><span class="w"> </span><span class="cm">/* getting value of the first dimension of the box */</span>
-<span class="w">    </span><span class="n">c</span><span class="o">=</span><span class="n">statebufferO</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span><span class="w"> </span><span class="cm">/* getting value of the second dimension of the box */</span>
-<span class="w">    </span><span class="cm">/* writing the row and the column */</span>
-<span class="w">    </span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;--line=&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">l</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; --column=&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">c</span><span class="p">;</span>
-<span class="w">    </span><span class="cm">/* getting the values and the action at the index of the state */</span>
-<span class="w">    </span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; --Optimal action=&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">policy</span><span class="o">-&gt;</span><span class="n">getActionIndex</span><span class="p">(</span><span class="n">indexO</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; --Optimal Value=&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">policy</span><span class="o">-&gt;</span><span class="n">getValueIndex</span><span class="p">(</span><span class="n">indexO</span><span class="p">)</span><span class="w">  </span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+<span class="cm">/* Traverse */</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">stateType</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">stateSpace</span><span class="o">-&gt;</span><span class="n">Cardinal</span><span class="p">();</span><span class="w"> </span><span class="o">++</span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="cm">/* Getting the index of the state */</span>
+<span class="w">    </span><span class="n">stateType</span><span class="w"> </span><span class="n">indexO</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">stateSpace</span><span class="o">-&gt;</span><span class="n">Index</span><span class="p">(</span><span class="n">statebufferO</span><span class="p">);</span>
+<span class="w">    </span><span class="cm">/* The different values of the states are in the array statebufferO */</span>
+<span class="w">    </span><span class="n">stateType</span><span class="w"> </span><span class="n">l</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">statebufferO</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span><span class="w"> </span><span class="cm">/* Getting value of the first dimension of the box */</span>
+<span class="w">    </span><span class="n">stateType</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">statebufferO</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span><span class="w"> </span><span class="cm">/* Getting value of the second dimension of the box */</span>
+<span class="w">    </span><span class="cm">/* Writing the row and the column */</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;--line=&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">l</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; --column=&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">c</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/* Getting the values and the action at the index of the state */</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; --Optimal action=&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">policy</span><span class="o">-&gt;</span><span class="n">getActionIndex</span><span class="p">(</span><span class="n">indexO</span><span class="p">)</span>
+<span class="w">              </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; --Optimal Value=&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">policy</span><span class="o">-&gt;</span><span class="n">getValueIndex</span><span class="p">(</span><span class="n">indexO</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
 <span class="w">    </span><span class="cm">/* Move to next state */</span>
 <span class="w">    </span><span class="n">stateSpace</span><span class="o">-&gt;</span><span class="n">NextState</span><span class="p">(</span><span class="n">statebufferO</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="cm">/* Clean up */</span>
+<span class="k">delete</span><span class="w"> </span><span class="n">stateSpace</span><span class="p">;</span>
+<span class="k">delete</span><span class="w"> </span><span class="n">actionSpace</span><span class="p">;</span>
+<span class="k">delete</span><span class="w"> </span><span class="n">CostMat</span><span class="p">;</span>
+<span class="k">delete</span><span class="w"> </span><span class="n">mdpSSP</span><span class="p">;</span>
+<span class="k">delete</span><span class="w"> </span><span class="n">optimum2</span><span class="p">;</span>
+
+<span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -502,7 +524,7 @@ Deleting 2 (MDP)
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="exampleMDP30.html" class="btn btn-neutral float-left" title="Example MDP 30" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="exampleMDP21.html" class="btn btn-neutral float-left" title="Example MDP 21 : Average MDP and Policy handling" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="exampleMDP40.html" class="btn btn-neutral float-right" title="Example MDP 40" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

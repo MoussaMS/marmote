@@ -1,7 +1,7 @@
-MDP Lesson 1: discounted MDP
-============================
+MDP Example 10: Discounted MDP
+==============================
 
-This lesson shows how to create and solve an infinite-horizon Markov Decision Process (MDP) with discounted criteria.
+This illustrative example is the same one for C++ than the illustrative example of MDP Lesson 1 for python.
 
 Using the library
 -----------------
@@ -39,7 +39,7 @@ Formally, an MDP is a tuple *(S,A,P_a,R)* where:
 * *R* is a reward (or cost) matrix
 
 Description of the example implemented here
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 We consider a simple model with two states x1=0 and x2=1 and in each state: two actions a1=0 and a2=1.
 
@@ -202,10 +202,10 @@ We now build a DiscountedMDP object using the constructor, to which we pass the 
     mdp->Write();
 
 Solving the MDP
---------------
+----------------
 
 List of solution methods
-~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 We list here the different methods implemented to solve discounted Markov Decision Processes. Details of the methods can be found in the literature. All these methods return a ``FeedbackSolutionMDP`` object.
 
@@ -216,7 +216,7 @@ We list here the different methods implemented to solve discounted Markov Decisi
 5. Modified Policy Iteration with Gauss Seidel method named ``PolicyIterationModifiedGS``
 
 Running a solution method
-~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Parameters:
 
@@ -274,7 +274,7 @@ Thus, for Policy Iteration Modified, the third and fourth parameters will be the
     optimum4->Write();
 
 Printing Information during the solving process
-""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""
 
 The following instruction modifies the display of internal information during the solving methods, such as the number of iterations performed and the achieved precision.
 
@@ -283,7 +283,7 @@ The following instruction modifies the display of internal information during th
     mdp->changeVerbosity(true);
 
 Policy Iteration Modified with Gauss Seidel
-""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""
 
 The Policy Iteration method can use (as described in Puterman's book) a Gauss Seidel evaluation. Please note that Policy Iteration Modified With Gauss Seidel Evaluation is not proven for all criteria (but it is for discounted criteria).
 
