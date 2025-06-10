@@ -29,8 +29,8 @@ C:/wamp64/www/wordpress
 
 ### 5. Créer la base de données
 - Ouvrir : http://localhost/phpmyadmin
-- Créer une base de données appelée **miage_entretien**
-- Importer le fichier `miage_entretien.sql` s’il est fourni dans `/docs/`
+- Créer une base de données appelée **bdd_wordpress(1)**
+- Importer le fichier `bdd_wordpress(1).sql` s’il est fourni 
 
 ### 6. Accéder à la plateforme
 - Aller sur : http://localhost/wordpress
@@ -41,7 +41,7 @@ C:/wamp64/www/wordpress
 
 - **URL** : http://localhost/wordpress/wp-admin  
 - **Identifiant** : `admin_miage`  
-- **Mot de passe** : Voir le fichier `docs/identifiants.txt` ou à définir à l’installation
+- **Mot de passe** : disponible aux etudiants Miage
 
 ---
 
