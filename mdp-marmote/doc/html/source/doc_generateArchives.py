@@ -19,12 +19,12 @@ from nbconvert import PythonExporter # Converts Jupyter notebooks to Python scri
          to manipulate marmote packages on Google Colab, create an archive. 
 """
 
-# Configuration des images à remplacer (à placer après les imports)
+# Configuration des images
 IMAGE_MAPPINGS = {
     "Mitrani_chain.png": "https://marmote.gitlabpages.inria.fr/marmote/_images/Mitrani_chain.png", # pour AppLesson 1
     #"tandemQueue.png": "https://github.com/MoussaMS/_images/raw/main/tandemQueue.png", # pour AppLesonn 2
-    #"geron.png": "https://github.com/MoussaMS/_images/raw/main/geron.png", # Pour MDPLesson 2 mais utilise pour linstant base64
-    #"FourRooms.png": "https://github.com/MoussaMS/_images/raw/main/FourRooms.png" # Pour MDPLesson 4 mais utilise pour linstant base64
+    #"geron.png": "https://github.com/MoussaMS/_images/raw/main/geron.png", # Pour MDPLesson 2 si le lien vers le site ne marche pas
+    #"FourRooms.png": "https://github.com/MoussaMS/_images/raw/main/FourRooms.png" # Pour MDPLesson 4 
 
 	"tandemQueue.png": "https://marmote.gitlabpages.inria.fr/marmote/_images/tandemQueue.png", # pour AppLesonn 2
     "geron.png": "https://marmote.gitlabpages.inria.fr/marmote/_images/geron.png", # pour MPDLesson 2
