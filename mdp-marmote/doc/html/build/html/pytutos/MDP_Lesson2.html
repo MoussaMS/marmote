@@ -60,7 +60,6 @@
 <li class="toctree-l3"><a class="reference internal" href="Lesson5.html">Lesson 5: Predefined Markov Chains</a></li>
 <li class="toctree-l3"><a class="reference internal" href="MDP_Lesson1.html">MDP Lesson 1: discounted MDP</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">MDP Lesson 2: additional methods</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#Import-the-modules">Import the modules</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#Table-of-Contents">Table of Contents</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#Model">Model</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#Build-the-MDP---Constructor-1">Build the MDP - Constructor 1</a></li>
@@ -110,8 +109,7 @@
              
   <section id="MDP-Lesson-2:-additional-methods">
 <h1>MDP Lesson 2: additional methods<a class="headerlink" href="#MDP-Lesson-2:-additional-methods" title="Link to this heading"></a></h1>
-<section id="Import-the-modules">
-<h2>Import the modules<a class="headerlink" href="#Import-the-modules" title="Link to this heading"></a></h2>
+<p>Import the modules</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
@@ -131,7 +129,6 @@
 </pre></div>
 </div>
 </div>
-</section>
 <section id="Table-of-Contents">
 <h2>Table of Contents<a class="headerlink" href="#Table-of-Contents" title="Link to this heading"></a></h2>
 <ol class="arabic simple">
@@ -148,7 +145,7 @@
 <section id="Description-of-the-Model">
 <h3>Description of the Model<a class="headerlink" href="#Description-of-the-Model" title="Link to this heading"></a></h3>
 <p>We use a model with three states <em>s1, s2, s3</em> and three actions <em>a0, a1, a2</em>. Transition probabilities and rewards are described by the picture below.</p>
-<p><img alt="8a08eaa35a7f4c6499d42d64d325ec60" src="../_images/geron1.png" /></p>
+<p><img alt="ef04ec51491640bd8983122fbbde323d" src="../_images/geron1.png" /></p>
 </section>
 </section>
 <section id="Build-the-MDP---Constructor-1">
@@ -283,9 +280,8 @@ R3 [[0.000000e+00, 0.000000e+00, 0.000000e+00],
 
 </pre></div></div>
 </div>
-</section>
 <section id="Parameters-definition">
-<h3>Parameters definition<a class="headerlink" href="#Parameters-definition" title="Link to this heading"></a></h3>
+<h4>Parameters definition<a class="headerlink" href="#Parameters-definition" title="Link to this heading"></a></h4>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
@@ -295,6 +291,7 @@ R3 [[0.000000e+00, 0.000000e+00, 0.000000e+00],
 </pre></div>
 </div>
 </div>
+</section>
 </section>
 <section id="Build-the-MDP">
 <h3>Build the MDP<a class="headerlink" href="#Build-the-MDP" title="Link to this heading"></a></h3>
@@ -307,19 +304,26 @@ R3 [[0.000000e+00, 0.000000e+00, 0.000000e+00],
 </div>
 </div>
 </section>
-</section>
-<section id="Q-Value">
-<h2>Q-Value<a class="headerlink" href="#Q-Value" title="Link to this heading"></a></h2>
-<p><a class="reference internal" href="#Table-of-Contents"><span class="std std-ref">Back to Table of Contents</span></a></p>
-<section id="Creation-of-the-Q-Value-associated-with-a-policy">
-<h3>Creation of the Q Value associated with a policy<a class="headerlink" href="#Creation-of-the-Q-Value-associated-with-a-policy" title="Link to this heading"></a></h3>
-<p>It also possible to create a <code class="docutils literal notranslate"><span class="pre">FeedbackQvalueMDP</span></code> in a <code class="docutils literal notranslate"><span class="pre">DiscountedMDP</span></code>. A <code class="docutils literal notranslate"><span class="pre">FeedbackQvalueMDP</span></code> is an object that is created form the value of a policy (in our case a <code class="docutils literal notranslate"><span class="pre">FeedbackSolutionMDP</span></code>). It stores a <em>Q-value</em> for any couple <em>(s,a)</em> with <em>s</em> the state and <em>a</em> the action. From that, it is then possible to randomly draw actions according to the <em>EpsilonGreedy</em> or <em>Softmax</em> rules.</p>
-<p>Create the <code class="docutils literal notranslate"><span class="pre">FeedbackQvalueMDP</span></code> object</p>
-<div class="nbinput docutils container">
+<section id="Solve-the-MDP">
+<h3>Solve the MDP<a class="headerlink" href="#Solve-the-MDP" title="Link to this heading"></a></h3>
+<p>Giving a value to the parameters for the solving algorithms</p>
+<div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">F</span> <span class="o">=</span> <span class="n">second_mdp</span><span class="o">.</span><span class="n">GetQValue</span><span class="p">(</span><span class="n">optimum2</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#create and initialize epsilon.</span>
+<span class="n">epsilon</span> <span class="o">=</span> <span class="mf">0.00001</span>
+<span class="c1">#maximum number of iterations allowed.</span>
+<span class="n">maxIter</span> <span class="o">=</span> <span class="mi">150</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">optimum2</span> <span class="o">=</span> <span class="n">second_mdp</span><span class="o">.</span><span class="n">ValueIteration</span><span class="p">(</span><span class="n">epsilon</span><span class="p">,</span> <span class="n">maxIter</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">optimum2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -328,17 +332,116 @@ R3 [[0.000000e+00, 0.000000e+00, 0.000000e+00],
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
-<span class="ansi-cyan-fg">Cell</span><span class="ansi-cyan-fg"> </span><span class="ansi-green-fg">In[9]</span><span class="ansi-green-fg">, line 1</span>
-<span class="ansi-green-fg">----&gt; </span><span class="ansi-green-fg">1</span> F = second_mdp.GetQValue(<span class="ansi-yellow-bg">optimum2</span>)
+#############################################
+Solution of MDP problem
+Size of the state space: 3
+#############################################
+Solution model: Feedback Stationary Policy
+- column 1: index of the state
+- column 2: Value function
+- column 3: Optimal action
 
-<span class="ansi-red-fg">NameError</span>: name &#39;optimum2&#39; is not defined
+  0           21.8983   0
+  1           1.17884   1
+  2           53.8725   2
+#############################################
+
+
 </pre></div></div>
+</div>
+</section>
+</section>
+<section id="Q-Value">
+<h2>Q-Value<a class="headerlink" href="#Q-Value" title="Link to this heading"></a></h2>
+<p><a class="reference internal" href="#Table-of-Contents"><span class="std std-ref">Back to Table of Contents</span></a></p>
+<section id="Creation-of-the-Markov-chain-associated-with-a-policy">
+<h3>Creation of the Markov chain associated with a policy<a class="headerlink" href="#Creation-of-the-Markov-chain-associated-with-a-policy" title="Link to this heading"></a></h3>
+<p>The transition matrix associated with a policy can be retrieved using the <code class="docutils literal notranslate"><span class="pre">getChain</span></code> method, which returns a <code class="docutils literal notranslate"><span class="pre">SparseMatrix</span></code> constructed with respect to the policy given as a parameter.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Mat</span><span class="o">=</span><span class="n">second_mdp</span><span class="o">.</span><span class="n">GetChain</span><span class="p">(</span><span class="n">optimum2</span><span class="p">)</span>
+<span class="n">Mat</span><span class="o">.</span><span class="n">set_type</span><span class="p">(</span><span class="n">mc</span><span class="o">.</span><span class="n">DISCRETE</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">Mat</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[[7.000000e-01, 3.000000e-01, 0.000000e+00],
+ [0.000000e+00, 0.000000e+00, 1.000000e+00],
+ [8.000000e-01, 1.000000e-01, 1.000000e-01]]
+
+</pre></div></div>
+</div>
+<p>No we create the Markov Chain as detailled in Lesson 1. We first create the initial distribution, then the chain.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">initial_prob</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span> <span class="p">[</span><span class="mf">0.333</span><span class="p">,</span> <span class="mf">0.333</span><span class="p">,</span> <span class="mf">0.334</span><span class="p">]</span> <span class="p">)</span>
+<span class="n">states</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">initial</span> <span class="o">=</span> <span class="n">mc</span><span class="o">.</span><span class="n">DiscreteDistribution</span><span class="p">(</span><span class="n">states</span><span class="p">,</span> <span class="n">initial_prob</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">chain</span> <span class="o">=</span> <span class="n">mmc</span><span class="o">.</span><span class="n">MarkovChain</span><span class="p">(</span> <span class="n">Mat</span> <span class="p">)</span>
+<span class="n">chain</span><span class="o">.</span><span class="n">set_init_distribution</span><span class="p">(</span><span class="n">initial</span><span class="p">)</span>
+<span class="n">chain</span><span class="o">.</span><span class="n">set_model_name</span><span class="p">(</span> <span class="s2">&quot;Chain issued from the MDP&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Print the chain</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">chain</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+discrete sparse
+3
+         0          0 7.000000e-01
+         0          1 3.000000e-01
+         1          2 1.000000e+00
+         2          0 8.000000e-01
+         2          1 1.000000e-01
+         2          2 1.000000e-01
+stop
+discrete values { 0 1 2 } probas {    0.333    0.333    0.334 }
+
+</pre></div></div>
+</div>
+</section>
+<section id="Creation-of-the-Q-Value-associated-with-a-policy-(for-R.L.-purpose)">
+<h3>Creation of the Q Value associated with a policy (for R.L. purpose)<a class="headerlink" href="#Creation-of-the-Q-Value-associated-with-a-policy-(for-R.L.-purpose)" title="Link to this heading"></a></h3>
+<p>It also possible to create a <code class="docutils literal notranslate"><span class="pre">FeedbackQvalueMDP</span></code> in a <code class="docutils literal notranslate"><span class="pre">DiscountedMDP</span></code>. A <code class="docutils literal notranslate"><span class="pre">FeedbackQvalueMDP</span></code> is an object that is created form the value of a policy (in our case a <code class="docutils literal notranslate"><span class="pre">FeedbackSolutionMDP</span></code>). It stores a <em>Q-value</em> for any couple <em>(s,a)</em> with <em>s</em> the state and <em>a</em> the action. From that, it is then possible to randomly draw actions according to the <em>EpsilonGreedy</em> or <em>Softmax</em> rules.</p>
+<p>Create the <code class="docutils literal notranslate"><span class="pre">FeedbackQvalueMDP</span></code> object</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">F</span> <span class="o">=</span> <span class="n">second_mdp</span><span class="o">.</span><span class="n">GetQValue</span><span class="p">(</span><span class="n">optimum2</span><span class="p">)</span>
+</pre></div>
+</div>
 </div>
 <p>Then we print it</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">F</span><span class="p">)</span>
@@ -350,39 +453,36 @@ R3 [[0.000000e+00, 0.000000e+00, 0.000000e+00],
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
-<span class="ansi-cyan-fg">Cell</span><span class="ansi-cyan-fg"> </span><span class="ansi-green-fg">In[10]</span><span class="ansi-green-fg">, line 1</span>
-<span class="ansi-green-fg">----&gt; </span><span class="ansi-green-fg">1</span> <span style="color: rgb(0,135,0)">print</span>(<span class="ansi-yellow-bg">F</span>)
+#############################################
+# - column 1: index of the state
+# - column 2: index of the action
+# - column 3: Value
+#
+0 0 21.89831521
+0 1 20.80335271
+0 2 16.86666105
+1 0 1.119894386
+1 1 1.178885397
+1 2 -99998.88011
+2 0 -99948.82111
+2 1 -99948.82111
+2 2 53.87256015
+#############################################
 
-<span class="ansi-red-fg">NameError</span>: name &#39;F&#39; is not defined
 </pre></div></div>
 </div>
 <p>For drawing action we should reset the random generator</p>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">F</span><span class="o">.</span><span class="n">ResetSeed</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
-<span class="ansi-cyan-fg">Cell</span><span class="ansi-cyan-fg"> </span><span class="ansi-green-fg">In[11]</span><span class="ansi-green-fg">, line 1</span>
-<span class="ansi-green-fg">----&gt; </span><span class="ansi-green-fg">1</span> <span class="ansi-yellow-bg">F</span>.ResetSeed()
-
-<span class="ansi-red-fg">NameError</span>: name &#39;F&#39; is not defined
-</pre></div></div>
-</div>
 <p>We draw an action with <em>EpsilonGreedy</em> principle in state 0 with epsilon=0.1 for a maximisation criteria</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">action</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">EpsilonGreedyMax</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
@@ -395,18 +495,12 @@ R3 [[0.000000e+00, 0.000000e+00, 0.000000e+00],
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
-<span class="ansi-cyan-fg">Cell</span><span class="ansi-cyan-fg"> </span><span class="ansi-green-fg">In[12]</span><span class="ansi-green-fg">, line 1</span>
-<span class="ansi-green-fg">----&gt; </span><span class="ansi-green-fg">1</span> action = <span class="ansi-yellow-bg">F</span>.EpsilonGreedyMax(<span class="ansi-green-fg">0</span>, <span class="ansi-green-fg">0.1</span>)
-<span class="ansi-green-fg">      2</span> <span style="color: rgb(0,135,0)">print</span>(action)
-
-<span class="ansi-red-fg">NameError</span>: name &#39;F&#39; is not defined
+0
 </pre></div></div>
 </div>
 <p>We draw an action with <em>SoftMax</em> principle in state 2</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">action</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">SoftMax</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
@@ -419,13 +513,7 @@ R3 [[0.000000e+00, 0.000000e+00, 0.000000e+00],
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
-<span class="ansi-cyan-fg">Cell</span><span class="ansi-cyan-fg"> </span><span class="ansi-green-fg">In[13]</span><span class="ansi-green-fg">, line 1</span>
-<span class="ansi-green-fg">----&gt; </span><span class="ansi-green-fg">1</span> action = <span class="ansi-yellow-bg">F</span>.SoftMax(<span class="ansi-green-fg">2</span>)
-<span class="ansi-green-fg">      2</span> <span style="color: rgb(0,135,0)">print</span>(action)
-
-<span class="ansi-red-fg">NameError</span>: name &#39;F&#39; is not defined
+2
 </pre></div></div>
 </div>
 </section>

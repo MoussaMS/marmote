@@ -11,7 +11,7 @@
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "## Import the modules"
+    "Import the modules"
    ]
   },
   {
@@ -58,7 +58,7 @@
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "## Model\n",
+    "## <a id='model'></a>Model\n",
     "\n",
     "[Back to Table of Contents](#table-of-contents)\n",
     "\n",
@@ -72,7 +72,7 @@
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "## Build the MDP - Constructor 1\n",
+    "## <a id='build-the-mdp---constructor-1'></a>Build the MDP - Constructor 1\n",
     "\n",
     "[Back to Table of Contents](#table-of-contents)\n",
     "\n",
@@ -122,7 +122,7 @@
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "## Build the MDP - Constructor 2\n",
+    "## <a id='build-the-mdp---constructor-2'></a>Build the MDP - Constructor 2\n",
     "\n",
     "[Back to Table of Contents](#table-of-contents)\n",
     "\n",
@@ -167,7 +167,7 @@
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "## Build the MDP - Constructor 3\n",
+    "## <a id='build-the-mdp---constructor-3'></a>Build the MDP - Constructor 3\n",
     "\n",
     "[Back to Table of Contents](#table-of-contents)\n",
     "\n",
@@ -236,7 +236,7 @@
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "### Parameters definition"
+    "#### Parameters definition"
    ]
   },
   {
@@ -269,11 +269,117 @@
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "## Q-Value\n",
+    "### Solve the MDP"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Giving a value to the parameters for the solving algorithms"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "#create and initialize epsilon.\n",
+    "epsilon = 0.00001\n",
+    "#maximum number of iterations allowed.\n",
+    "maxIter = 150"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "optimum2 = second_mdp.ValueIteration(epsilon, maxIter)\n",
+    "print(optimum2)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## <a id='q-value'></a>Q-Value\n",
     "\n",
     "[Back to Table of Contents](#table-of-contents)\n",
     "\n",
-    "### Creation of the Q Value associated with a policy"
+    "### Creation of the Markov chain associated with a policy"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "The transition matrix associated with a policy can be retrieved using the `getChain` method, which returns a `SparseMatrix` constructed with respect to the policy given as a parameter."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "Mat=second_mdp.GetChain(optimum2)\n",
+    "Mat.set_type(mc.DISCRETE)\n",
+    "print(Mat)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "No we create the Markov Chain as detailled in Lesson 1. We first create the initial distribution, then the chain."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "initial_prob = np.array( [0.333, 0.333, 0.334] )\n",
+    "states=np.array([0,1,2])\n",
+    "initial = mc.DiscreteDistribution(states, initial_prob)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "chain = mmc.MarkovChain( Mat )\n",
+    "chain.set_init_distribution(initial)\n",
+    "chain.set_model_name( \"Chain issued from the MDP\")"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Print the chain"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "print(chain)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Creation of the Q Value associated with a policy (for R.L. purpose)"
    ]
   },
   {
